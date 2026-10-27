@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sasanka Rasanjana | UX/UI and Product Designer</title>
+  <meta name="description" content="Sasanka Rasanjana designs mobile apps and dashboards in Colombo, Sri Lanka, and builds his own iOS apps with Claude Code.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <a class="nav-me" href="#top" aria-label="Back to top">
+    <img src="img/me.webp" alt="" width="32" height="32">
+    <span>Sasanka</span>
+  </a>
+  <nav class="nav-links" aria-label="Sections">
+    <a href="#work">Work</a>
+    <a href="#apps">Apps</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <a class="btn btn-sm btn-dark" href="Sasanka_Rasanjana_CV.pdf" target="_blank" rel="noopener">Resume</a>
+</header>
+
+<main id="top">
+
+  <section class="hero-spot">
+    <p class="status" data-rise style="--d:0ms"><i></i>Available for work · Colombo, Sri Lanka</p>
+    <h1 class="hero-name" aria-label="Sasanka Rasanjana"><span class="w" data-split>Sasanka</span> <span class="w" data-split>Rasanjana</span></h1>
+    <script>
+      document.querySelectorAll('[data-split]').forEach((w, wi) => {
+        w.setAttribute('aria-hidden', 'true');
+        w.innerHTML = [...w.textContent].map((c, i) => `<span class="ch" style="--i:${i + wi * 7}">${c}</span>`).join('');
+      });
+    </script>
+    <p class="hero-sub" data-rise style="--d:320ms">Product designer in Colombo. I design mobile apps and dashboards that people understand at a glance, and lately I build them too.</p>
+    <div class="hero-ctas" data-rise style="--d:440ms">
+      <a class="btn btn-dark" href="#work">View work <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <a class="btn btn-light" href="Sasanka_Rasanjana_CV.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+    <div class="spot" data-rise style="--d:520ms">
+      <div class="spot-ground" aria-hidden="true"></div>
+      <div class="phone s-l2"><div class="screen"><img src="img/screens/vela-04-home-1.webp" alt="" class="is-on"><img data-src="img/apps/keells-05.webp" alt=""><img data-src="img/apps/pouch-new.webp" alt=""><img data-src="img/screens/vela-04-16.webp" alt=""><img data-src="img/screens/trust-09-tx-1.webp" alt=""></div></div>
+      <div class="phone s-l1"><div class="screen"><img src="img/screens/trust-08-home-1.webp" alt="" class="is-on"><img data-src="img/screens/vela-04-01.webp" alt=""><img data-src="img/apps/cloudia-add.webp" alt=""><img data-src="img/screens/trust-09-proof-1.webp" alt=""><img data-src="img/apps/pouch-overview.webp" alt=""></div></div>
+      <div class="phone s-c"><div class="screen"><img src="img/apps/pouch-today.webp" alt="" class="is-on"><img data-src="img/screens/trust-08-01.webp" alt=""><img data-src="img/screens/trust-08-pay-2.webp" alt=""><img data-src="img/apps/pouch-celebrate-week.webp" alt=""><img data-src="img/apps/fret-insights.webp" alt=""></div></div>
+      <div class="phone s-r1"><div class="screen"><img src="img/apps/cloudia-today.webp" alt="" class="is-on"><img data-src="img/apps/fret-welcome.webp" alt=""><img data-src="img/screens/vela-04-09.webp" alt=""><img data-src="img/apps/fret-lantern.webp" alt=""><img data-src="img/apps/cloudia-my-turn.webp" alt=""></div></div>
+      <div class="phone s-r2"><div class="screen"><img src="img/apps/keells-06.webp" alt="" class="is-on"><img data-src="img/apps/pouch-setup.webp" alt=""><img data-src="img/apps/keells-14.webp" alt=""><img data-src="img/apps/cloudia-streak.webp" alt=""><img data-src="img/apps/keells-07.webp" alt=""></div></div>
+      <div class="spot-pager">
+        <button aria-label="Previous screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <div class="spot-dots" aria-hidden="true"><i class="is-on"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i></div>
+        <button aria-label="Next screen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="section-head" data-reveal>
+      <h2>Selected work</h2>
+      <p>Two research case studies from my degree, and a redesign that reached over 100,000 people on LinkedIn.</p>
+    </div>
+
+    <div class="cases">
+      <a class="case case-trust case-wide" href="work/trustbank.html" data-reveal data-cursor="Read the case study">
+        <div class="case-text">
+          <p class="case-meta">TrustBank · Research case study · Fintech</p>
+          <h3>Making everyday banking feel <span class="chip"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6z"/><path d="M9 12l2 2 4-4"/></svg>faster and safer</span> for every generation</h3>
+          <dl class="case-spec"><div><dt>Role</dt><dd>Research and UI</dd></div><div><dt>Built on</dt><dd>My thesis</dd></div><div><dt>Screens</dt><dd>20+</dd></div></dl>
+          <span class="case-cta">Read case study <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+        <div class="case-img"><div class="sc-phones"><div class="phone"><div class="screen"><img src="img/screens/trust-08-01.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/screens/trust-08-home-1.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/screens/trust-08-pay-2.webp" alt="" loading="lazy"></div></div></div></div>
+      </a>
+
+      <a class="case case-vela" href="work/vela.html" data-reveal data-cursor="Read the case study">
+        <div class="case-text">
+          <p class="case-meta">VELA · Research case study · E-commerce</p>
+          <h3>Shopping that is <span class="chip"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4.5-4.5"/></svg>easy to search</span> and quick to check out</h3>
+          <dl class="case-spec"><div><dt>Surveyed</dt><dd>~300</dd></div><div><dt>Interviews</dt><dd>9</dd></div><div><dt>Tested</dt><dd>60</dd></div></dl>
+          <span class="case-cta">Read case study <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+        <div class="case-img"><div class="sc-phones"><div class="phone"><div class="screen"><img src="img/screens/vela-04-01.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/screens/vela-04-home-1.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/screens/vela-04-09.webp" alt="" loading="lazy"></div></div></div></div>
+      </a>
+
+      <a class="case case-keells" href="work/keells.html" data-reveal data-cursor="See the redesign">
+        <div class="case-text">
+          <p class="case-meta">Keells · Redesign concept · Retail</p>
+          <h3>A fresh, modern <span class="chip"><svg viewBox="0 0 24 24"><path d="M4 5h2l2 11h10l2-8H7"/><circle cx="10" cy="20" r="1.2"/><circle cx="17" cy="20" r="1.2"/></svg>grocery app</span> for Sri Lanka's favourite supermarket</h3>
+          <dl class="case-spec"><div><dt>LinkedIn reach</dt><dd>100k+</dd></div><div><dt>Reactions</dt><dd>2k+</dd></div></dl>
+          <span class="case-cta">See the redesign <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        </div>
+        <div class="case-img"><div class="sc-phones"><div class="phone"><div class="screen"><img src="img/apps/keells-05.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/apps/keells-06.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/apps/keells-14.webp" alt="" loading="lazy"></div></div></div></div>
+      </a>
+    </div>
+
+    <a class="more-row" href="work/zestbowls.html" data-reveal>
+      <img src="img/zest-card.webp" alt="" width="160" height="96" loading="lazy">
+      <div class="more-text">
+        <b>ZestBowls</b>
+        <span>A healthy meal ordering web app, designed end to end</span>
+      </div>
+      <span class="more-meta">Product concept · Web</span>
+      <span class="more-arrow" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </a>
+  </section>
+
+  <section class="section" id="apps">
+    <div class="section-head" data-reveal>
+      <h2>Apps I designed and built</h2>
+      <p>I read what people complain about in App Store reviews, design the fix in Figma, then build it myself with Claude Code.</p>
+    </div>
+
+    <article class="showcase sc-cloudia" data-reveal>
+      <div class="sc-copy">
+        <div class="sc-title"><h3>Cloudia</h3><span class="sc-state is-live">Website live</span></div>
+        <p class="sc-lede">For small promises too small for a calendar.</p>
+        <div class="sc-mini"><div><b>Voice</b><span>Say it, get a card</span></div><div><b>Loops</b><span>My turn and Waiting</span></div><div><b>Private</b><span>No account needed</span></div></div>
+        <div class="sc-ctas"><a class="btn btn-dark" href="work/cloudia.html">See the app <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a><a class="btn btn-light" href="https://sasankarasanjana29.github.io/cloudia-site/" target="_blank" rel="noopener">Website</a></div>
+      </div>
+      <div class="sc-phones"><div class="phone"><div class="screen"><img src="img/apps/cloudia-today-dark.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/apps/cloudia-today.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/apps/cloudia-loop-late.webp" alt="" loading="lazy"></div></div></div>
+    </article>
+
+    <article class="showcase sc-pouch is-flip" data-reveal>
+      <div class="sc-copy">
+        <div class="sc-title"><h3>Pouch</h3><span class="sc-state">In progress</span></div>
+        <p class="sc-lede">A calm money app that never asks for your bank login.</p>
+        <div class="sc-mini"><div><b>1,751</b><span>reviews read</span></div><div><b>24%</b><span>hate bank sync</span></div><div><b>3 taps</b><span>to log a spend</span></div></div>
+        <div class="sc-ctas"><a class="btn btn-dark" href="work/pouch.html">See the app <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+      <div class="sc-phones"><div class="phone"><div class="screen"><img src="img/apps/pouch-budget.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/apps/pouch-today.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/apps/pouch-overview.webp" alt="" loading="lazy"></div></div></div>
+    </article>
+
+    <article class="showcase sc-fret" data-reveal>
+      <div class="sc-copy">
+        <div class="sc-title"><h3>Fretbelly</h3><span class="sc-state">In progress</span></div>
+        <p class="sc-lede">A small creature that eats your worries.</p>
+        <div class="sc-mini"><div><b>45k</b><span>reviews read</span></div><div><b>11k</b><span>screens studied</span></div><div><b>2 of 17</b><span>came true</span></div></div>
+        <div class="sc-ctas"><a class="btn btn-white" href="work/fretbelly.html">See the app <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      </div>
+      <div class="sc-phones"><div class="phone"><div class="screen"><img src="img/apps/fret-write.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/apps/fret-home.webp" alt="" loading="lazy"></div></div><div class="phone"><div class="screen"><img src="img/apps/fret-insights.webp" alt="" loading="lazy"></div></div></div>
+    </article>
+
+  </section>
+
+  <section class="section" id="about">
+    <div class="section-head" data-reveal>
+      <h2>About me</h2>
+      <p>From portraits on Fiverr to product design at a restaurant tech company, and now building my own apps.</p>
+    </div>
+
+    <div class="about-col about-wide" data-reveal>
+      <h3 class="col-title">How I got here</h3>
+      <ol class="journey">
+        <li><div class="step"><time>2019 to now</time><b>Freelance Portrait Artist</b><span class="where">Fiverr · Level 1 Seller</span><p>100+ portraits for clients worldwide, rated 4.9.</p></div></li>
+        <li><div class="step"><time>2021 to 2025</time><b>BSc (Hons) Industrial IT</b><span class="where">Uva Wellassa University · GPA 3.7</span><p>Thesis on how three generations use apps. TrustBank and VELA came from it.</p></div></li>
+        <li><div class="step"><time>Apr to Dec 2025</time><b>Intern UX/UI Designer</b><span class="where">Dinetap</span><p>App restructure and point of sale features with dev-ready specs.</p></div></li>
+        <li class="is-now"><div class="step"><time>Dec 2025 to now</time><b>Associate UX/UI Designer <span class="now">Now</span></b><span class="where">Dinetap</span><p>Mobile app, back office dashboard and the design system behind both.</p></div></li>
+      </ol>
+    </div>
+
+    <div class="about">
+      <div class="about-col" data-reveal>
+        <h3 class="col-title">Quick things about me</h3>
+        <div class="faq">
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="true"><span><i>01</i>Why did I get into design?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="faq-a"><div><p>I have always loved making things. I started in graphic design as a portrait artist, and with my IT background, UX/UI let me bring creativity and tech together in a career I love.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span><i>02</i>How do I usually work?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="faq-a"><div><p>Low-fidelity wireframes first, then the paths and interactions. I iterate on testing and feedback until the design is functional, clear and good to look at.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span><i>03</i>My favourite project so far?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="faq-a"><div><p>The Keells redesign. It was not a full case study, but it reached over 100,000 people and 2,000+ reactions on LinkedIn, and it connected me with the design community.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span><i>04</i>How do I deal with feedback?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="faq-a"><div><p>I welcome it. I listen carefully, ask questions when something is unclear, and iterate until the design feels right.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span><i>05</i>What tools do I use most?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="faq-a"><div><p>Figma for UI and prototypes, Framer for responsive sites, Jitter for animation, Illustrator and Photoshop for visuals, and Notion, ClickUp and Slack every day with my team. Lately also Claude Code and Lovable to build.</p></div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q" aria-expanded="false"><span><i>06</i>What is my design vibe?</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+            <div class="faq-a"><div><p>Simple, practical and realistic. Designs that look good, solve real problems and can actually be built without overcomplicating things.</p></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="about-col" data-reveal>
+        <h3 class="col-title">My creative stack</h3>
+        <ul class="tools"><li><span class="ico full"><img src="img/tools/figma.svg" alt="" width="44" height="44"></span><b>Figma</b><span>UI, wireframes and prototypes</span></li><li><span class="ico"><img src="img/tools/framer.svg" alt="" width="44" height="44"></span><b>Framer</b><span>Responsive websites</span></li><li><span class="ico full"><img src="img/tools/jitter.webp" alt="" width="44" height="44"></span><b>Jitter</b><span>UI animation</span></li><li><span class="ico"><img src="img/tools/claude.svg" alt="" width="44" height="44"></span><b>Claude Code</b><span>Building my own apps</span></li><li><span class="ico"><img src="img/tools/lovable.svg" alt="" width="44" height="44"></span><b>Lovable</b><span>Shipping web projects</span></li><li><span class="ico full"><img src="img/tools/illustrator.webp" alt="" width="44" height="44"></span><b>Illustrator</b><span>Vector portraits and graphics</span></li><li><span class="ico full"><img src="img/tools/photoshop.svg" alt="" width="44" height="44"></span><b>Photoshop</b><span>Image editing</span></li><li><span class="ico full"><img src="img/tools/premiere.webp" alt="" width="44" height="44"></span><b>Premiere Pro</b><span>Product demos and video</span></li><li><span class="ico"><img src="img/tools/notion.svg" alt="" width="44" height="44"></span><b>Notion</b><span>Docs and planning</span></li><li><span class="ico"><img src="img/tools/clickup.svg" alt="" width="44" height="44"></span><b>ClickUp</b><span>Tasks with my team</span></li><li><span class="ico"><img src="img/tools/slack.svg" alt="" width="44" height="44"></span><b>Slack</b><span>Daily team chat</span></li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="contact-card" data-reveal>
+      <h2>Let's make something clear and useful.</h2>
+      <p>Open to UX/UI and product design roles in Colombo or remote.</p>
+      <div class="contact-ctas">
+        <button class="btn btn-white copy" data-email="sasanka.rasanjana29@gmail.com">
+          <span class="copy-label">sasanka.rasanjana29@gmail.com</span>
+          <span class="copy-done" aria-hidden="true">Copied to clipboard</span>
+        </button>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/sasanka-rasanjana" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" href="https://www.behance.net/sasankarasanjana" target="_blank" rel="noopener">Behance</a>
+      </div>
+    </div>
+    <p class="footer-note">Designed and built by Sasanka, with Claude Code. 2026.</p>
+  </section>
+
+</main>
+
+<div class="cursor-pill" aria-hidden="true"></div>
+<p class="sr-only" role="status" id="live"></p>
+<script src="main.js" defer></script>
+</body>
+</html>
