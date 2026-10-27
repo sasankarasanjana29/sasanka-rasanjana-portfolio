@@ -759,3 +759,16 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 /* card circles: barely there */
 .case-trust, .case-vela, .sc-cloudia, .sc-pouch { --fx-ring: rgba(0, 0, 0, 0.025); }
 .case-keells, .sc-fret { --fx-ring: rgba(255, 255, 255, 0.03); }
+
+/* work cards show whole phones, the same size and fan as the app cards */
+.case-img, .case-wide .case-img { padding: 32px 32px; align-items: center; align-self: center; }
+.case-img .sc-phones { margin-bottom: 0; padding: 8px 0; }
+.case-img .sc-phones .phone { --sw: 176px; }
+@media (hover: hover) and (pointer: fine) { .case:hover .case-img .sc-phones { transform: translateY(-6px); } }
+@media (max-width: 900px) {
+  .case-img, .case-wide .case-img { padding: 8px 24px 32px; }
+  .case-img .sc-phones { margin-bottom: 0; }
+  .case-img .sc-phones .phone { --sw: 124px; }
+}
+@media (max-width: 640px) { .case-img .sc-phones .phone { --sw: 112px; } }
+@media (max-width: 400px) { .case-img .sc-phones .phone { --sw: 100px; } }
