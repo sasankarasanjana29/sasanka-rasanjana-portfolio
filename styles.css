@@ -710,3 +710,52 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   .case-img .sc-phones { margin-bottom: -64px; }
   .showcase .sc-phones .phone { --sw: 112px; }
 }
+
+/* whole board images: rounded a little more than the boards' own panels, so no rim shows */
+.shots img.plain { border-radius: clamp(14px, 3vw, 36px); outline: none; }
+
+/* hero phones: spacing follows the screen width so none are cut off */
+@media (max-width: 1180px) and (min-width: 901px) {
+  .spot .s-l1 { transform: translateX(-50%) translateX(-21vw) rotate(-6deg); }
+  .spot .s-r1 { transform: translateX(-50%) translateX(21vw) rotate(6deg); }
+  .spot .s-l2, .spot .s-r2 { --sw: 13vw; }
+  .spot .s-l2 { transform: translateX(-50%) translateX(-36vw) rotate(-11deg); }
+  .spot .s-r2 { transform: translateX(-50%) translateX(36vw) rotate(11deg); }
+}
+@media (max-width: 640px) {
+  .spot .s-c { --sw: 42vw; }
+  .spot .s-l1, .spot .s-r1 { --sw: 28vw; }
+  .spot .s-l1 { transform: translateX(-50%) translateX(-25vw) rotate(-7deg); }
+  .spot .s-r1 { transform: translateX(-50%) translateX(25vw) rotate(7deg); }
+}
+@media (max-width: 400px) {
+  .case-img .sc-phones .phone, .showcase .sc-phones .phone { --sw: 100px; }
+}
+/* stage tall enough for the phone size at each width, so phones never cover the buttons */
+@media (max-width: 640px) { .spot { height: calc(42vw * 920 / 402 + 70px); } }
+
+/* hero: who I am, with one phrase underlined like a pen stroke */
+.hero-role { margin-top: 16px; font-family: var(--display); font-weight: 600; font-size: clamp(18px, 2vw, 24px); letter-spacing: -0.015em; color: var(--ink); text-wrap: balance; }
+.hero-role i { font-style: normal; color: var(--ink-3); margin: 0 6px; }
+.pen { position: relative; white-space: nowrap; color: var(--accent); }
+.pen svg { position: absolute; left: -2%; right: -2%; bottom: -9px; width: 104%; height: 12px; overflow: visible; }
+.pen path { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; opacity: 0.55; stroke-dasharray: 340; stroke-dashoffset: 340; }
+.js .pen path { animation: pen 1.1s 0.9s var(--ease-out) forwards; }
+@keyframes pen { to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .js .pen path { animation: none; stroke-dashoffset: 0; } }
+@media (max-width: 640px) { .pen { white-space: normal; } .hero-role i:last-of-type { display: block; height: 0; overflow: hidden; } }
+.hero-spot .hero-sub { margin-top: 18px; }
+
+/* the highlight chips are back in card titles, same weight as the title */
+.case .chip { display: inline; padding: 1px 10px; border-radius: 999px; background: var(--chip-bg); color: var(--chip-ink); white-space: nowrap; font-weight: inherit; line-height: inherit; }
+.case-trust { --chip-bg: #ffd65c; --chip-ink: #4a3200; }
+.case-vela { --chip-bg: #a9e7da; --chip-ink: #07443c; }
+.case-keells { --chip-bg: rgba(142, 240, 155, 0.2); --chip-ink: #8ef09b; }
+.sc-lede .chip { padding: 1px 9px; border-radius: 999px; background: var(--chip-bg); color: var(--chip-ink); font-weight: 600; white-space: nowrap; }
+.sc-cloudia { --chip-bg: #cfe3ff; --chip-ink: #1d4fa8; }
+.sc-pouch { --chip-bg: #ddd3ff; --chip-ink: #4a2fc9; }
+.sc-fret { --chip-bg: rgba(255, 184, 107, 0.2); --chip-ink: #ffcf96; }
+
+/* card circles: barely there */
+.case-trust, .case-vela, .sc-cloudia, .sc-pouch { --fx-ring: rgba(0, 0, 0, 0.025); }
+.case-keells, .sc-fret { --fx-ring: rgba(255, 255, 255, 0.03); }
