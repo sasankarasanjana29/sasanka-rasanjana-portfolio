@@ -858,3 +858,5 @@ html.lenis, html.lenis body { height: auto; }
 .org-fiverr img, .org-uwu img { height: 100%; filter: none; }
 .journey .step time, .journey .step:has(.org-fiverr) time { padding-right: 40px; }
 .shots img.plain { outline: 1px solid rgba(20, 20, 20, 0.08); outline-offset: -1px; }
+.frame-body { background: #fff; }
+.frame-scroll { max-width: 925px; margin-inline: auto; }
