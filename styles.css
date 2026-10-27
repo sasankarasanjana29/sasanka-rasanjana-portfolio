@@ -772,3 +772,11 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 }
 @media (max-width: 640px) { .case-img .sc-phones .phone { --sw: 112px; } }
 @media (max-width: 400px) { .case-img .sc-phones .phone { --sw: 100px; } }
+
+/* work cards spread their phones on hover, like the app cards */
+@media (hover: hover) and (pointer: fine) {
+  .case:hover .case-img .sc-phones { transform: none; }
+  .case:hover .case-img .phone:nth-child(1) { transform: translateX(6%) rotate(-7deg) scale(0.92); }
+  .case:hover .case-img .phone:nth-child(2) { transform: translateY(-20px); }
+  .case:hover .case-img .phone:nth-child(3) { transform: translateX(-6%) rotate(7deg) scale(0.92); }
+}
