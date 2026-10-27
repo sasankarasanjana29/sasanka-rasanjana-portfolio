@@ -53,20 +53,6 @@ if (line) {
   fill();
 }
 
-// Cursor pill over case cards, mouse only.
-const pill = document.querySelector('.cursor-pill');
-if (pill && fine && !reduce) {
-  document.body.classList.add('cursor-on');
-  addEventListener('pointermove', (e) => {
-    pill.style.setProperty('--x', `${e.clientX}px`);
-    pill.style.setProperty('--y', `${e.clientY}px`);
-  }, { passive: true });
-  document.querySelectorAll('[data-cursor]').forEach((card) => {
-    card.addEventListener('pointerenter', () => { pill.textContent = card.dataset.cursor; pill.classList.add('is-on'); });
-    card.addEventListener('pointerleave', () => pill.classList.remove('is-on'));
-  });
-}
-
 // FAQ: one open at a time.
 const qs = document.querySelectorAll('.faq-q');
 qs.forEach((q) => q.addEventListener('click', () => {
