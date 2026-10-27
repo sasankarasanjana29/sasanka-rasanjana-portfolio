@@ -834,3 +834,27 @@ html.lenis, html.lenis body { height: auto; }
   .journey li:not(:last-child)::after { content: ""; position: absolute; left: -19px; top: 33px; bottom: -21px; width: 2px; background: linear-gradient(180deg, #d9d6f5, var(--accent)); }
   .journey .step { padding: 16px 18px; border-radius: 18px; }
 }
+
+/* small organisation logo in the top-right of each experience step */
+.journey .step { position: relative; }
+.journey .step time { display: block; padding-right: 44px; }
+.org { position: absolute; top: 12px; right: 12px; height: 28px; min-width: 28px; padding: 0 6px; border-radius: 9px; display: grid; place-items: center; background: var(--white); box-shadow: inset 0 0 0 1px var(--line); }
+.org img { display: block; height: 16px; width: auto; }
+.org-fiverr { padding: 0 8px; background: #1dbf73; box-shadow: none; }
+.org-fiverr img { height: 13px; filter: brightness(0) invert(1); }
+.org-uwu img { height: 20px; }
+.journey .step:has(.org-fiverr) time { padding-right: 70px; }
+
+/* browser windows for web pages; a tall page scrolls inside its window */
+.frame { box-shadow: 0 24px 50px -30px rgba(0, 0, 0, 0.3); }
+.frame-bar { align-items: center; background: #fafafa; }
+.frame-bar span { margin-left: 12px; padding: 3px 12px; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 1px var(--line); font-size: 12px; color: var(--ink-3); }
+.frame-scroll .frame-body { max-height: min(78vh, 760px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+
+/* experience: square organisation tiles in the top-right */
+.org { width: 30px; height: 30px; min-width: 0; padding: 0; border-radius: 8px; overflow: hidden; box-shadow: inset 0 0 0 1px var(--line); }
+.org img { width: 100%; height: 100%; object-fit: cover; }
+.org-fiverr, .org-uwu, .org-dinetap { padding: 0; background: none; }
+.org-fiverr img, .org-uwu img { height: 100%; filter: none; }
+.journey .step time, .journey .step:has(.org-fiverr) time { padding-right: 40px; }
+.shots img.plain { outline: 1px solid rgba(20, 20, 20, 0.08); outline-offset: -1px; }
