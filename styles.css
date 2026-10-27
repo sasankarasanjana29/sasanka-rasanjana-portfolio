@@ -809,3 +809,28 @@ html.lenis, html.lenis body { height: auto; }
   .js [data-reveal] { transform: none; transition: opacity 300ms ease; }
   .case:active, .more-row:active, .next a:active, .tools li:active, .journey .step:active, .faq-q:active { transform: none; }
 }
+
+/* ---------- experience, cleaned up ----------
+   The line runs exactly from the first dot to the last; dots sit level with
+   each date; the current role is a white card with a purple outline. */
+.journey .step { background: var(--white); color: var(--ink); box-shadow: none; }
+.journey li.is-now .step { background: var(--white); color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--accent), 0 12px 30px -18px rgba(91, 61, 245, 0.45); }
+.journey li.is-now time, .journey li.is-now .where { color: inherit; }
+.journey li.is-now time { color: var(--ink-3); }
+.journey li.is-now .where { color: var(--ink-2); }
+.journey .now { background: #e7f8ee; color: #15803d; }
+.journey li::before { width: 12px; height: 12px; top: 10px; background: var(--white); box-shadow: inset 0 0 0 3px var(--accent); }
+.journey li.is-now::before { background: var(--live); box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.18); animation: none; }
+/* desktop: horizontal line from the first dot to the last */
+.journey::before { left: 6px; right: calc((100% - 36px) / 4 - 6px); top: 15px; height: 2px; background: linear-gradient(90deg, #d9d6f5, var(--accent)); }
+
+@media (max-width: 900px) {
+  .journey { padding-left: 24px; gap: 12px; }
+  .journey::before { display: none; }
+  .journey li { padding-top: 0; }
+  /* dot level with the date line */
+  .journey li::before { left: -24px; top: 21px; }
+  /* each step draws its own segment down to the next dot, so the line stops at the last one */
+  .journey li:not(:last-child)::after { content: ""; position: absolute; left: -19px; top: 33px; bottom: -21px; width: 2px; background: linear-gradient(180deg, #d9d6f5, var(--accent)); }
+  .journey .step { padding: 16px 18px; border-radius: 18px; }
+}
