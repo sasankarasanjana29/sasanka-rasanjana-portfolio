@@ -778,14 +778,34 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   .case:hover .case-img .phone:nth-child(3) { transform: translateX(-6%) rotate(7deg) scale(0.92); }
 }
 
-/* ---------- cursor: a real arrow, just nicer; purple over anything clickable ---------- */
-@media (hover: hover) and (pointer: fine) {
-  html, body { cursor: url("img/cursor/arrow.svg") 6 3, default; }
-  a, button, [role="button"], .faq-q, .case, .more-row, .next a, .rail img, .rail .phone, .frame img, .shots img, .reviews img, .spot-pager button {
-    cursor: url("img/cursor/arrow-accent.svg") 6 3, pointer;
-  }
-  .case *, .more-row *, .next a * { cursor: inherit; }
-}
-
 /* case-page section pills: the active one in the project's deep shade, white text */
-.cs-nav a.is-on, .t-trust .cs-nav a.is-on { background: var(--t-ink); color: #fff; }
+.cs-nav a.is-on { background: var(--t-ink); color: #fff; }
+.t-trust .cs-nav a.is-on { background: #ffd65c; color: #3d2a00; }
+
+/* ---------- motion pass (Emil Kowalski's rules) ----------
+   Hover is frequent, so it is quick (about 350ms) and only uses transform
+   and opacity; reveals are marketing, so they may run a little longer;
+   everything that can be pressed answers with a small scale. */
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: hidden; }
+html.lenis, html.lenis body { height: auto; }
+
+.case-img .sc-phones, .case-img .phone, .sc-phones .phone, .showcase .phone, .reel .phone, .next-media .phone, .next-media > img { transition-duration: 450ms; transition-property: transform; transition-timing-function: var(--ease-out); }
+.spot .phone { transition: transform 500ms var(--ease-out); }
+.case, .more-row, .next a, .showcase { transition: box-shadow 300ms ease, transform 160ms var(--ease-out); }
+.case:active, .more-row:active, .next a:active { transform: scale(0.99); }
+.tools li:active, .journey .step:active, .faq-q:active { transform: scale(0.98); }
+.faq-q { transition: transform 160ms var(--ease-out); }
+.js [data-reveal] { transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out); transform: translateY(16px); }
+/* short staggers inside groups that arrive together */
+.js .journey li, .js .tools li, .js .stat-row > div { opacity: 0; transform: translateY(10px); transition: opacity 500ms var(--ease-out), transform 500ms var(--ease-out); transition-delay: calc(var(--i, 0) * 60ms); }
+.js .is-in .journey li, .js .is-in .tools li, .js .stat-row.is-in > div { opacity: 1; transform: none; }
+/* images fade in as they arrive instead of popping */
+.js img.fade { opacity: 0; transition: opacity 400ms ease; }
+.js img.fade.is-loaded { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .js .journey li, .js .tools li, .js .stat-row > div { opacity: 1; transform: none; transition: none; }
+  .js [data-reveal] { transform: none; transition: opacity 300ms ease; }
+  .case:active, .more-row:active, .next a:active, .tools li:active, .journey .step:active, .faq-q:active { transform: none; }
+}

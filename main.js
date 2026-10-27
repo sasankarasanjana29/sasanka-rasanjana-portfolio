@@ -29,6 +29,30 @@ const sweep = () => {
 addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(sweep); } }, { passive: true });
 setTimeout(sweep, 1200);
 
+// Smooth, weighted wheel scrolling (Lenis, vendored). Mouse and trackpad on a
+// desktop only: touch keeps the platform's own scrolling, and reduced motion
+// keeps native scrolling. In-page links glide and land under the nav.
+if (window.Lenis && fine && !reduce) {
+  const lenis = new Lenis({ lerp: 0.1, smoothWheel: true, anchors: { offset: -96 } });
+  window.__lenis = lenis;
+  const raf = (t) => { lenis.raf(t); requestAnimationFrame(raf); };
+  requestAnimationFrame(raf);
+}
+
+// Stagger: children of groups that arrive together get their index.
+document.querySelectorAll('.journey, .tools, .stat-row').forEach((g) => {
+  [...g.children].forEach((c, i) => c.style.setProperty('--i', Math.min(i, 8)));
+});
+
+// Lazy images fade in when they arrive (already-loaded ones show at once).
+document.querySelectorAll('img[loading="lazy"]').forEach((img) => {
+  if (img.complete && img.naturalWidth) return;
+  img.classList.add('fade');
+  const done = () => img.classList.add('is-loaded');
+  img.addEventListener('load', done, { once: true });
+  img.addEventListener('error', done, { once: true });
+});
+
 // Nav frosts once the page moves.
 const nav = document.getElementById('nav');
 const onScroll = () => nav.classList.toggle('is-scrolled', scrollY > 24);
@@ -97,11 +121,12 @@ if (zoomable.length) {
   const box = document.createElement('div');
   box.className = 'lightbox';
   box.setAttribute('role', 'dialog');
+  box.setAttribute('data-lenis-prevent', '');
   box.setAttribute('aria-label', 'Enlarged image');
   box.innerHTML = '<button aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button><img alt="">';
   document.body.append(box);
   const big = box.querySelector('img');
-  const close = () => { box.classList.remove('is-open'); document.body.style.overflow = ''; };
+  const close = () => { box.classList.remove('is-open'); document.body.style.overflow = ''; window.__lenis?.start(); };
   zoomable.forEach((img) => img.addEventListener('click', () => {
     big.removeAttribute('srcset');
     big.src = img.getAttribute('src').startsWith('..') ? new URL(img.getAttribute('src'), location.href).href : img.src;
@@ -109,6 +134,7 @@ if (zoomable.length) {
     box.scrollTop = 0;
     box.classList.add('is-open');
     document.body.style.overflow = 'hidden';
+    window.__lenis?.stop();
     box.querySelector('button').focus();
   }));
   box.addEventListener('click', close);
