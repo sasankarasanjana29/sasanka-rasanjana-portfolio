@@ -303,7 +303,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   background-color: var(--accent); color: #fff; border-radius: var(--r-xl); padding: clamp(48px, 7vw, 96px) var(--gutter); text-align: center;
   background-image: radial-gradient(rgba(255, 255, 255, 0.22) 1.2px, transparent 1.6px); background-size: 22px 22px;
 }
-.contact-card::before { content: ""; position: absolute; inset: 0; z-index: -1; background: repeating-radial-gradient(circle at 50% 120%, transparent 0 58px, rgba(255, 255, 255, 0.09) 59px 60px); }
+.contact-card::before { content: ""; position: absolute; inset: 0; z-index: -1; background: repeating-radial-gradient(circle at 50% 120%, transparent 0 58px, rgba(255, 255, 255, 0.06) 59px 60px); }
 .contact-card::after { content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none; background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 0%), rgba(255, 255, 255, 0.18), transparent 70%); transition: opacity 300ms ease; }
 .contact-card h2 { font-size: clamp(32px, 5vw, 60px); line-height: 1.04; max-width: 16ch; margin: 0 auto; }
 .contact-card p { margin-top: 16px; color: rgba(255, 255, 255, 0.8); font-size: 17px; }
@@ -421,7 +421,6 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   .case, .case-wide { grid-template-columns: minmax(0, 1fr); min-height: 0; }
   .case-text, .case-wide .case-text { padding: 28px 24px 0; }
   .case-img, .case-wide .case-img { padding: 20px 24px 0; }
-  .case-img img, .case-wide .case-img img { width: 78%; max-width: 420px; margin-bottom: -18%; }
   .sc-phones .phone { --sw: 124px; }
   .more-meta { display: none; }
   .showcase { grid-template-columns: minmax(0, 1fr); padding: 28px 22px; }
@@ -679,3 +678,35 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .sc-fret .btn-white { background: #fff; color: var(--ink); }
 .sc-fret .sc-title h3::before { background: #ffb86b; }
 .sc-cloudia .sc-state, .sc-pouch .sc-state { background: rgba(255, 255, 255, 0.75); }
+
+/* Footer treatment on every work and app card: an even dot grid, soft rings
+   rising from the bottom, and a light that follows the cursor. */
+.case, .showcase { position: relative; isolation: isolate; overflow: hidden; }
+.case::before, .showcase::before {
+  content: ""; display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  -webkit-mask: none; mask: none;
+  background-image:
+    radial-gradient(var(--fx-dot) 1.2px, transparent 1.6px),
+    repeating-radial-gradient(circle at 70% 120%, transparent 0 58px, var(--fx-ring) 59px 60px);
+  background-size: 22px 22px, auto;
+}
+.case::after, .showcase::after {
+  content: ""; display: block; position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: 0;
+  background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), var(--fx-glow), transparent 70%);
+  transition: opacity 350ms ease;
+}
+@media (hover: hover) and (pointer: fine) { .case:hover::after, .showcase:hover::after { opacity: 1; } }
+.case-trust { --fx-dot: rgba(168, 112, 0, 0.22); --fx-ring: rgba(168, 112, 0, 0.05); --fx-glow: rgba(255, 255, 255, 0.7); }
+.case-vela { --fx-dot: rgba(11, 110, 96, 0.2); --fx-ring: rgba(11, 110, 96, 0.05); --fx-glow: rgba(255, 255, 255, 0.7); }
+.case-keells { --fx-dot: rgba(142, 240, 155, 0.2); --fx-ring: rgba(142, 240, 155, 0.05); --fx-glow: rgba(142, 240, 155, 0.16); }
+.sc-cloudia { --fx-dot: rgba(47, 124, 246, 0.22); --fx-ring: rgba(47, 124, 246, 0.05); --fx-glow: rgba(255, 255, 255, 0.7); }
+.sc-pouch { --fx-dot: rgba(108, 76, 245, 0.22); --fx-ring: rgba(108, 76, 245, 0.05); --fx-glow: rgba(255, 255, 255, 0.65); }
+.sc-fret { --fx-dot: rgba(255, 255, 255, 0.18); --fx-ring: rgba(255, 255, 255, 0.05); --fx-glow: rgba(255, 255, 255, 0.14); }
+.more-row { position: relative; isolation: isolate; }
+
+/* phones on the cards read a little bigger on small screens */
+@media (max-width: 640px) {
+  .case-img .sc-phones .phone { --sw: 112px; }
+  .case-img .sc-phones { margin-bottom: -64px; }
+  .showcase .sc-phones .phone { --sw: 112px; }
+}

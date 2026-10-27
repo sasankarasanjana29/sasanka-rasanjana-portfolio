@@ -117,7 +117,8 @@ if (zoomable.length) {
   const big = box.querySelector('img');
   const close = () => { box.classList.remove('is-open'); document.body.style.overflow = ''; };
   zoomable.forEach((img) => img.addEventListener('click', () => {
-    big.src = img.currentSrc || img.src;
+    big.removeAttribute('srcset');
+    big.src = img.getAttribute('src').startsWith('..') ? new URL(img.getAttribute('src'), location.href).href : img.src;
     big.alt = img.alt;
     box.scrollTop = 0;
     box.classList.add('is-open');
@@ -158,7 +159,7 @@ if (name && fine && !reduce) {
 
 // Work cards and the contact card: a soft light follows the cursor.
 if (fine && !reduce) {
-  document.querySelectorAll('.case, .contact-card, .hero-full').forEach((el) => {
+  document.querySelectorAll('.case, .showcase, .contact-card').forEach((el) => {
     el.addEventListener('pointermove', (e) => {
       const r = el.getBoundingClientRect();
       el.style.setProperty('--mx', `${e.clientX - r.left}px`);
@@ -190,7 +191,11 @@ if (spot) {
   const count = phones[0].length;
   let at = 0;
   let timer;
-  const load = (n) => phones.forEach((imgs) => { const img = imgs[n]; if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; } });
+  const load = (n) => phones.forEach((imgs) => {
+    const img = imgs[n];
+    if (img.dataset.srcset) { img.srcset = img.dataset.srcset; delete img.dataset.srcset; }
+    if (img.dataset.src) { img.src = img.dataset.src; delete img.dataset.src; }
+  });
   const show = (n) => {
     n = (n + count) % count;
     load(n);
