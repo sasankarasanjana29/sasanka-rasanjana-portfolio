@@ -350,7 +350,7 @@ const PROJECTS = {
     ['trustbank', 'TrustBank', 'Mobile banking, research case study', 'screens/trust-08-home-1-300.webp', '#f5b400'],
     ['vela', 'VELA', 'E-commerce app, research case study', 'screens/vela-04-home-1-300.webp', '#2cc3ae'],
     ['keells', 'Keells redesign', 'Grocery app concept, 100k+ reach', 'apps/keells-06-300.webp', '#1f9d3a'],
-    ['zestbowls', 'ZestBowls', 'Healthy meal ordering web app', 'zest-hero.webp', '#1a8e44'],
+    ['zestbowls', 'ZestBowls', 'Healthy meal ordering web app', 'zest-peek.webp', '#1a8e44'],
   ],
   apps: [
     ['cloudia', 'Cloudia', 'Owe-and-owed tracker, iOS', 'apps/cloudia-today-300.webp', '#2f7cf6'],
@@ -367,7 +367,7 @@ if (navEl) {
   const peek = ([slug, name, , shot, tint]) => {
     const web = !shot.includes('/');
     const media = web
-      ? `<div class="np-web"><img data-src="${img(shot)}" alt=""></div>`
+      ? `<div class="np-web"><div class="np-web-bar"><i></i><i></i><i></i></div><img data-src="${img(shot)}" alt=""></div>`
       : `<div class="phone"><div class="screen"><img data-src="${img(shot)}" alt=""></div></div>`;
     return `<div class="np-peek" data-slug="${slug}" style="--tint:${tint}" aria-hidden="true">${media}</div>`;
   };
