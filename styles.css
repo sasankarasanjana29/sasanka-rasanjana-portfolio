@@ -1043,3 +1043,7 @@ html.lenis, html.lenis body { height: auto; }
 @media (min-width: 901px) {
   .showcase .sc-phones .phone, .case-img .sc-phones .phone { --sw: clamp(96px, 11vw, 150px); }
 }
+/* the raised middle phone makes a fan look high: sit the set a little lower */
+@media (min-width: 901px) {
+  .case-img .sc-phones, .showcase .sc-phones { position: relative; top: 14px; }
+}
