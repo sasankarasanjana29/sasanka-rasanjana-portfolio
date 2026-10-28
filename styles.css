@@ -910,3 +910,111 @@ html.lenis, html.lenis body { height: auto; }
   .nav > .btn { margin-left: auto; }
   .nav-menu-btn { margin-left: 0; }
 }
+
+/* ---------- desktop case pages: less scrolling ----------
+   Each phone group is one row: title and notes on the left, phones in a
+   single line on the right. Spacing on Apple's 8pt grid: 16/24 inside a
+   group, 48 between groups, 80 between sections. Phones keep the stacked
+   layout. */
+@media (min-width: 1000px) {
+  .cs-sec { padding-top: 80px; }
+  .group:has(.rail.phones) {
+    margin-top: 48px; display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+    gap: 24px 48px; align-items: center;
+  }
+  .group:has(.rail.phones) .group-head { display: block; }
+  .group:has(.rail.phones) .group-head h3 { font-size: 20px; line-height: 1.3; }
+  .group:has(.rail.phones) .group-head ul { margin-top: 8px; padding-left: 16px; font-size: 15px; line-height: 1.5; }
+  .rail.phones {
+    margin-top: 0; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr);
+    grid-template-columns: none; gap: 16px; align-items: start; max-width: 760px;
+  }
+  .rail.phones figure { max-width: 168px; }
+  /* groups with more than four screens wrap into a second tidy row */
+  .rail.phones:has(figure:nth-child(5)) { grid-auto-flow: row; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .group:has(.rail.phones) + .group:has(.rail.phones) { padding-top: 48px; border-top: 1px solid var(--line); }
+}
+
+/* ---------- flow cards: every flow of a case on screen at once ---------- */
+.flowgrid { margin-top: 32px; display: grid; gap: 16px; }
+.cs-sec .flowgrid > .group.group:has(.rail.phones) { margin: 0; padding: 24px 0 24px 24px; border: 0; border-radius: 28px; background: var(--t-soft, var(--card)); display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; overflow: hidden; }
+.flowgrid .group-head { padding-right: 24px; }
+.flowgrid .group-head h3 { font-size: 20px; line-height: 1.3; }
+.flowgrid .group-head ul { margin-top: 8px; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+/* phones and tablets: one row of screens that swipes sideways */
+.flowgrid .rail.phones { margin: 0; max-width: none; display: grid; grid-auto-flow: column; grid-template-columns: none; grid-auto-columns: clamp(124px, 35vw, 196px); gap: 14px; align-items: start; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scroll-padding-inline: 24px; margin-bottom: -24px; padding: 8px 24px 32px 0; scrollbar-width: none; }
+.flowgrid .rail.phones::-webkit-scrollbar { display: none; }
+.flowgrid .rail.phones figure { max-width: none; scroll-snap-align: start; }
+.flowgrid .rail.phones .phone { filter: drop-shadow(0 8px 12px rgba(10, 20, 50, 0.14)); }
+@media (min-width: 1000px) {
+  .flowgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+  .cs-sec .flowgrid > .group.group:has(.rail.phones) { padding: 32px; gap: 24px; align-content: start; overflow: visible; }
+  .flowgrid .group-head { padding-right: 0; }
+  .flowgrid > .group.is-wide, .flowgrid > .group.is-row { grid-column: 1 / -1; }
+  /* desktop: every screen of a flow in view, no swiping */
+  .flowgrid .rail.phones { overflow: visible; margin-bottom: 0; padding: 0; scroll-snap-type: none; grid-auto-columns: minmax(0, 1fr); gap: 16px; }
+  .flowgrid .rail.phones:has(figure:nth-child(5)) { grid-auto-flow: column; grid-template-columns: none; }
+  /* a flow on its own: title beside phones of a fixed size, so the card fills */
+  .cs-sec .flowgrid > .group.is-row.is-row:has(.rail.phones) { grid-template-columns: minmax(220px, 1fr) minmax(0, auto); gap: 24px 40px; align-items: center; }
+  .flowgrid .is-row .rail.phones { grid-auto-columns: minmax(0, 168px); }
+}
+
+/* ---------- demo: a real recording with steps that follow it ---------- */
+.demo { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 32px 64px; align-items: center; padding: 40px; border-radius: var(--r-xl); background: var(--t-soft, var(--card)); }
+.demo-phone .phone { --sw: 250px; position: relative; }
+.demo-phone video { width: 100%; height: 100%; object-fit: cover; display: block; background: #fff; }
+.demo-copy h2 { font-size: clamp(26px, 2.8vw, 34px); }
+.demo-copy .sub { margin-top: 8px; color: var(--ink-3); font-size: 15px; }
+.demo-steps { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 8px; }
+.demo-steps button { width: 100%; display: grid; grid-template-columns: 64px 1fr; gap: 16px; align-items: baseline; padding: 16px 20px; border-radius: 18px; text-align: left; background: rgba(255, 255, 255, 0.5); transition: background-color 250ms ease, box-shadow 250ms ease, transform 160ms var(--ease-out); }
+.demo-steps button:active { transform: scale(0.99); }
+.demo-steps .k { font-family: var(--display); font-weight: 600; font-size: 15px; color: var(--ink-3); transition: color 250ms ease; }
+.demo-steps .d { color: var(--ink-2); font-size: 16px; line-height: 1.45; }
+.demo-steps li.is-on button { background: #fff; box-shadow: 0 10px 24px -18px rgba(0, 0, 0, 0.35); }
+.demo-steps li.is-on .k { color: var(--t-ink, var(--accent)); }
+.demo-steps li.is-on .d { color: var(--ink); }
+.demo-all { margin-top: 12px; padding: 8px 14px; border-radius: 999px; font-size: 14px; font-weight: 500; color: var(--t-ink, var(--accent)); background: rgba(255, 255, 255, 0.6); opacity: 0; pointer-events: none; transition: opacity 200ms ease; }
+.demo.is-looping .demo-all { opacity: 1; pointer-events: auto; }
+@media (hover: hover) { .demo-all:hover { background: #fff; } }
+.demo-steps li.is-loop .k::after { content: " \21BB"; font-weight: 500; }
+@media (max-width: 900px) {
+  .demo { grid-template-columns: minmax(0, 1fr); justify-items: center; padding: 28px 20px; }
+  .demo-phone .phone { --sw: min(230px, 62vw); }
+  .demo-copy { width: 100%; }
+  .demo-steps button { grid-template-columns: 52px 1fr; padding: 14px 16px; }
+}
+
+/* ---------- nav project panels ---------- */
+.nav-drop { position: relative; display: flex; }
+.nav-drop-panel {
+  position: absolute; top: calc(100% + 14px); left: 50%; width: 540px; padding: 8px; border-radius: 22px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 8px; background: #fff;
+  box-shadow: inset 0 0 0 1px var(--line), 0 20px 44px -18px rgba(0, 0, 0, 0.28);
+  opacity: 0; visibility: hidden; transform: translateX(-50%) translateY(-4px) scale(0.98); transform-origin: top center;
+  transition: opacity 160ms ease, transform 200ms var(--ease-out), visibility 0s 200ms;
+}
+.nav-drop-panel::before { content: ""; position: absolute; left: 0; right: 0; top: -14px; height: 14px; }
+.nav-drop.is-open .nav-drop-panel { opacity: 1; visibility: visible; transform: translateX(-50%); transition: opacity 160ms ease, transform 200ms var(--ease-out); }
+.np-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 14px; transition: background-color 150ms ease; }
+.np-list { display: grid; gap: 2px; align-content: start; }
+.np-icon { width: 36px; height: 36px; border-radius: 10px; flex: none; object-fit: cover; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06); background: var(--card); }
+/* the peek: the hovered project's screen rising from the bottom of a tinted card */
+.np-peeks { position: relative; min-height: 236px; border-radius: 16px; overflow: hidden; }
+.np-peek { position: absolute; inset: 0; background: var(--tint); display: flex; justify-content: center; opacity: 0; transition: opacity 220ms ease; }
+.np-peek.is-on { opacity: 1; }
+.np-peek .phone { --sw: 150px; position: absolute; top: 22px; filter: drop-shadow(0 14px 22px rgba(0, 0, 0, 0.3)); transform: translateY(10px); transition: transform 420ms var(--ease-out); }
+.np-peek.is-on .phone { transform: none; }
+.np-web { position: absolute; left: 18px; top: 26px; width: 300px; border-radius: 10px; overflow: hidden; box-shadow: 0 12px 24px -10px rgba(10, 20, 50, 0.25); transform: translateY(10px); transition: transform 420ms var(--ease-out); }
+.np-peek.is-on .np-web { transform: none; }
+.np-web img { display: block; width: 100%; }
+.np-item b { display: block; font-size: 14px; font-weight: 600; color: var(--ink); }
+.np-item small { display: block; font-size: 12.5px; color: var(--ink-3); margin-top: 1px; }
+.np-item.is-here { background: rgba(20, 20, 20, 0.04); }
+@media (hover: hover) { .np-item:hover { background: rgba(20, 20, 20, 0.05); } }
+.nav-panel-sub { display: grid; padding: 0 0 6px 8px; }
+.nav-panel-sub .np-item { padding: 8px 10px; }
+.nav-panel-sub .np-item small { display: none; }
+.nav-panel-sub .np-icon { width: 32px; height: 32px; border-radius: 9px; }
+.nav-panel { max-height: calc(100svh - 100px); overflow-y: auto; min-width: 260px; }
+@media (max-width: 900px) { .nav-drop-panel { display: none; } }
+@media (prefers-reduced-motion: reduce) { .nav-drop-panel, .np-peek, .np-peek .phone, .np-web { transition: none; } }

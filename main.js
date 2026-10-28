@@ -249,3 +249,172 @@ if (navEl && navLinks) {
   document.addEventListener('click', (e) => { if (!e.target.closest('#nav')) set(false); });
   addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
 }
+
+// Case pages: a section with several phone flows lays them out as a grid of
+// cards, so every flow is on screen at once with nothing to tap or pin. Two
+// three-screen flows share a row. A long flow (six or more screens) runs the
+// full width under its title; any other flow left on its own puts the title
+// beside its phones. On phones each card's screens swipe sideways in one row.
+document.querySelectorAll('.cs-sec').forEach((sec) => {
+  const groups = [...sec.querySelectorAll(':scope > .group')].filter((g) => g.querySelector('.rail.phones'));
+  if (groups.length < 2) return;
+  const grid = document.createElement('div');
+  grid.className = 'flowgrid';
+  groups[0].before(grid);
+  const count = (g) => g.querySelectorAll('.rail.phones figure').length;
+  groups.forEach((g) => grid.append(g));
+  for (let i = 0; i < groups.length; i++) {
+    const g = groups[i], n = count(g), next = groups[i + 1];
+    if (n >= 6) { g.classList.add('is-wide'); continue; }
+    if (n === 3 && next && count(next) === 3) { i++; continue; }
+    g.classList.add('is-row');
+  }
+});
+
+// Demo clips: the whole flow plays on a loop while on screen, lighting the step
+// it has reached. Tapping a step jumps straight to it and loops just that part;
+// tapping it again replays it from the start. "Play all" goes back to the whole
+// flow. The clip is fetched before it scrolls into view, and every step starts
+// on a keyframe (tools/make_clip.py), so jumps land at once.
+// Reduced motion: no autoplay, the native controls instead.
+document.querySelectorAll('.demo').forEach((demo) => {
+  const video = demo.querySelector('video');
+  const items = [...demo.querySelectorAll('.demo-steps li')];
+  if (!video) return;
+  const at = items.map((li) => parseFloat(li.dataset.at) || 0);
+  let only = -1;
+  const end = (i) => (i + 1 < at.length ? at[i + 1] : video.duration || Infinity);
+  const light = () => {
+    let k = only;
+    if (k < 0) at.forEach((t, i) => { if (video.currentTime >= t - 0.05) k = i; });
+    items.forEach((li, i) => li.classList.toggle('is-on', i === Math.max(k, 0)));
+  };
+  // keep a looping part inside its own span, checked every frame while playing
+  let raf = 0;
+  const tick = () => {
+    raf = 0;
+    if (only >= 0 && video.currentTime >= end(only) - 0.08) video.currentTime = at[only];
+    light();
+    if (!video.paused) raf = requestAnimationFrame(tick);
+  };
+  const run = () => { if (!raf) raf = requestAnimationFrame(tick); };
+  video.addEventListener('play', run);
+  video.addEventListener('seeked', light);
+  const all = document.createElement('button');
+  all.type = 'button';
+  all.className = 'demo-all';
+  all.textContent = 'Play all';
+  demo.querySelector('.demo-steps').after(all);
+  const setMode = (i) => {
+    only = i;
+    items.forEach((x, k) => {
+      x.classList.toggle('is-loop', k === i);
+      x.querySelector('button').setAttribute('aria-pressed', String(k === i));
+    });
+    demo.classList.toggle('is-looping', i >= 0);
+  };
+  items.forEach((li, i) => {
+    const b = li.querySelector('button');
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => {
+      setMode(i);
+      video.preload = 'auto';
+      video.currentTime = at[i];
+      light();
+      if (video.paused) video.play().catch(() => {});
+    });
+  });
+  all.addEventListener('click', () => {
+    setMode(-1);
+    video.currentTime = 0;
+    light();
+    if (video.paused) video.play().catch(() => {});
+  });
+  items[0]?.classList.add('is-on');
+  if (reduce) { video.controls = true; return; }
+  // fetch the clip a screen ahead, so it is ready when it arrives
+  new IntersectionObserver(([e], o) => {
+    if (e.isIntersecting) { video.preload = 'auto'; video.load(); o.disconnect(); }
+  }, { rootMargin: '800px 0px' }).observe(demo);
+  new IntersectionObserver(([e]) => {
+    if (e.isIntersecting) video.play().catch(() => {}); else video.pause();
+  }, { threshold: 0.35 }).observe(video);
+});
+
+// Nav: hovering Work or Apps opens a panel listing those projects, with a peek
+// of the hovered project's screen beside the list. Clicking the word itself
+// still goes to that homepage section. The phone menu lists the same projects
+// with their icons.
+const PROJECTS = {
+  work: [
+    ['trustbank', 'TrustBank', 'Mobile banking, research case study', 'screens/trust-08-home-1-300.webp', '#f5b400'],
+    ['vela', 'VELA', 'E-commerce app, research case study', 'screens/vela-04-home-1-300.webp', '#2cc3ae'],
+    ['keells', 'Keells redesign', 'Grocery app concept, 100k+ reach', 'apps/keells-06-300.webp', '#1f9d3a'],
+    ['zestbowls', 'ZestBowls', 'Healthy meal ordering web app', 'zest-hero.webp', '#1a8e44'],
+  ],
+  apps: [
+    ['cloudia', 'Cloudia', 'Owe-and-owed tracker, iOS', 'apps/cloudia-today-300.webp', '#2f7cf6'],
+    ['pouch', 'Pouch', 'Calm budgeting app, iOS', 'apps/pouch-today-300.webp', '#6c4cf5'],
+    ['fretbelly', 'Fretbelly', 'Worry app with a creature, iOS', 'apps/fret-home-300.webp', '#3f3486'],
+  ],
+};
+if (navEl) {
+  const inWork = location.pathname.includes('/work/');
+  const href = (slug) => (inWork ? '' : 'work/') + slug + '.html';
+  const img = (path) => (inWork ? '../img/' : 'img/') + path;
+  const here = location.pathname.split('/').pop().replace('.html', '');
+  const item = ([slug, name, sub]) => `<a href="${href(slug)}" class="np-item${slug === here ? ' is-here' : ''}" data-slug="${slug}"><img class="np-icon" data-src="${img('icons/' + slug + '.webp')}" alt="" width="36" height="36" decoding="async"><span><b>${name}</b><small>${sub}</small></span></a>`;
+  const peek = ([slug, name, , shot, tint]) => {
+    const web = !shot.includes('/');
+    const media = web
+      ? `<div class="np-web"><img data-src="${img(shot)}" alt=""></div>`
+      : `<div class="phone"><div class="screen"><img data-src="${img(shot)}" alt=""></div></div>`;
+    return `<div class="np-peek" data-slug="${slug}" style="--tint:${tint}" aria-hidden="true">${media}</div>`;
+  };
+  ['work', 'apps'].forEach((key) => {
+    const link = navEl.querySelector(`.nav-links a[href$="#${key}"]`);
+    if (!link) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'nav-drop';
+    link.before(wrap);
+    wrap.append(link);
+    const panel = document.createElement('div');
+    panel.className = 'nav-drop-panel';
+    panel.innerHTML = `<div class="np-list">${PROJECTS[key].map(item).join('')}</div><div class="np-peeks">${PROJECTS[key].map(peek).join('')}</div>`;
+    wrap.append(panel);
+    const peeks = [...panel.querySelectorAll('.np-peek')];
+    const pick = (slug) => peeks.forEach((p) => p.classList.toggle('is-on', p.dataset.slug === slug));
+    pick((PROJECTS[key].find((p) => p[0] === here) || PROJECTS[key][0])[0]);
+    panel.querySelectorAll('.np-item').forEach((a) => {
+      a.addEventListener('pointerenter', () => pick(a.dataset.slug));
+      a.addEventListener('focus', () => pick(a.dataset.slug));
+    });
+    let t, loaded = false;
+    const open = () => {
+      clearTimeout(t);
+      if (!loaded) { loaded = true; panel.querySelectorAll('img[data-src]').forEach((i) => { i.src = i.dataset.src; }); }
+      wrap.classList.add('is-open');
+    };
+    const close = () => { t = setTimeout(() => wrap.classList.remove('is-open'), 120); };
+    wrap.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') open(); });
+    wrap.addEventListener('pointerleave', close);
+    wrap.addEventListener('focusin', open);
+    wrap.addEventListener('focusout', (e) => { if (!wrap.contains(e.relatedTarget)) close(); });
+  });
+  // phone menu: projects under their heading
+  const mp = navEl.querySelector('.nav-panel');
+  if (mp) {
+    ['work', 'apps'].forEach((key) => {
+      const a = mp.querySelector(`a[href$="#${key}"]`);
+      if (!a) return;
+      const sub = document.createElement('div');
+      sub.className = 'nav-panel-sub';
+      sub.innerHTML = PROJECTS[key].map(item).join('');
+      a.after(sub);
+    });
+    // icons load the first time the menu opens
+    navEl.querySelector('.nav-menu-btn')?.addEventListener('click', () => {
+      mp.querySelectorAll('img[data-src]').forEach((i) => { i.src = i.dataset.src; });
+    }, { once: true });
+  }
+}
