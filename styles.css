@@ -1047,3 +1047,4 @@ html.lenis, html.lenis body { height: auto; }
 @media (min-width: 901px) {
   .case-img .sc-phones, .showcase .sc-phones { position: relative; top: 14px; }
 }
+.cs-note { margin-top: 12px; font-size: 13px; line-height: 1.5; color: var(--ink-3); max-width: 48ch; }
