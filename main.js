@@ -308,6 +308,33 @@ document.querySelectorAll('.demo').forEach((demo) => {
   all.className = 'demo-all';
   all.textContent = 'Play all';
   demo.querySelector('.demo-steps').after(all);
+  // The whole clip (about 1 MB) is held in memory, so every jump plays from
+  // memory at once, whatever the server or browser does with partial loads.
+  let loading = null;
+  const load = () => loading || (loading = fetch(video.currentSrc || video.getAttribute('src'))
+    .then((r) => (r.ok ? r.blob() : Promise.reject()))
+    .then((b) => {
+      const t = video.currentTime, playing = !video.paused;
+      video.addEventListener('loadedmetadata', () => {
+        video.currentTime = t;
+        if (playing || only >= 0) video.play().catch(() => {});
+      }, { once: true });
+      video.src = URL.createObjectURL(b);
+    })
+    .catch(() => { video.preload = 'auto'; }));
+  const jump = (t) => {
+    load();
+    if (video.fastSeek && Math.abs(video.currentTime - t) > 0.5) video.fastSeek(t); else video.currentTime = t;
+    light();
+    if (video.paused) video.play().catch(() => {});
+  };
+  // on phones the steps sit under the video: bring the video into view
+  const show = () => {
+    const r = video.getBoundingClientRect();
+    if (r.top >= 64 && r.bottom <= innerHeight) return;
+    const y = scrollY + r.top - Math.max(72, (innerHeight - r.height) / 2);
+    if (window.__lenis) window.__lenis.scrollTo(y, { duration: 0.6 }); else scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+  };
   const setMode = (i) => {
     only = i;
     items.forEach((x, k) => {
@@ -321,23 +348,19 @@ document.querySelectorAll('.demo').forEach((demo) => {
     b.setAttribute('aria-pressed', 'false');
     b.addEventListener('click', () => {
       setMode(i);
-      video.preload = 'auto';
-      video.currentTime = at[i];
-      light();
-      if (video.paused) video.play().catch(() => {});
+      jump(at[i]);
+      show();
     });
   });
   all.addEventListener('click', () => {
     setMode(-1);
-    video.currentTime = 0;
-    light();
-    if (video.paused) video.play().catch(() => {});
+    jump(0);
   });
   items[0]?.classList.add('is-on');
   if (reduce) { video.controls = true; return; }
   // fetch the clip a screen ahead, so it is ready when it arrives
   new IntersectionObserver(([e], o) => {
-    if (e.isIntersecting) { video.preload = 'auto'; video.load(); o.disconnect(); }
+    if (e.isIntersecting) { load(); o.disconnect(); }
   }, { rootMargin: '800px 0px' }).observe(demo);
   new IntersectionObserver(([e]) => {
     if (e.isIntersecting) video.play().catch(() => {}); else video.pause();
