@@ -770,15 +770,6 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 @media (max-width: 640px) { .case-img .sc-phones .phone { --sw: 112px; } }
 @media (max-width: 400px) { .case-img .sc-phones .phone { --sw: 100px; } }
 
-/* work cards spread their phones on hover, like the app cards */
-@media (hover: hover) and (pointer: fine) {
-  .case:hover .case-img .sc-phones { transform: none; }
-  /* lift in place: never wider than at rest, so nothing reaches the card edge */
-  .case:hover .case-img .phone:nth-child(1) { transform: translateX(22%) translateY(-6px) rotate(-6deg) scale(0.9); }
-  .case:hover .case-img .phone:nth-child(2) { transform: translateY(-18px); }
-  .case:hover .case-img .phone:nth-child(3) { transform: translateX(-22%) translateY(-6px) rotate(6deg) scale(0.9); }
-}
-
 /* case-page section pills: the active one in the project's deep shade, white text */
 .cs-nav a.is-on { background: var(--t-ink); color: #fff; }
 .t-trust .cs-nav a.is-on { background: #ffd65c; color: #3d2a00; }
@@ -1036,11 +1027,19 @@ html.lenis, html.lenis body { height: auto; }
   .web-frame.is-capped .frame-body { max-height: 540px; }
 }
 
-/* app cards: side phones overlap the middle one only slightly, so their screens read whole */
-.showcase .sc-phones .phone:nth-child(1) { transform: translateX(9%) rotate(-4deg) scale(0.88); }
-.showcase .sc-phones .phone:nth-child(3) { transform: translateX(-9%) rotate(4deg) scale(0.88); }
+/* ---------- phone fans: one pattern for work and app cards ----------
+   At rest the side phones tuck slightly behind the middle one; on hover
+   they spread out and the middle one lifts. Phones are sized so the spread
+   pose still fits inside the card (checked 1000 to 1440 wide). */
+.sc-phones .phone:nth-child(1) { transform: translateX(16%) rotate(-5deg) scale(0.9); }
+.sc-phones .phone:nth-child(2) { z-index: 2; transform: translateY(-10px); }
+.sc-phones .phone:nth-child(3) { transform: translateX(-16%) rotate(5deg) scale(0.9); }
 @media (hover: hover) and (pointer: fine) {
-  .showcase:hover .sc-phones .phone:nth-child(1) { transform: translateX(9%) translateY(-6px) rotate(-5deg) scale(0.88); }
-  .showcase:hover .sc-phones .phone:nth-child(2) { transform: translateY(-18px); }
-  .showcase:hover .sc-phones .phone:nth-child(3) { transform: translateX(-9%) translateY(-6px) rotate(5deg) scale(0.88); }
+  .case:hover .case-img .sc-phones { transform: none; }
+  .case:hover .sc-phones .phone:nth-child(1), .showcase:hover .sc-phones .phone:nth-child(1) { transform: translateX(3%) rotate(-7deg) scale(0.92); }
+  .case:hover .sc-phones .phone:nth-child(2), .showcase:hover .sc-phones .phone:nth-child(2) { transform: translateY(-22px); }
+  .case:hover .sc-phones .phone:nth-child(3), .showcase:hover .sc-phones .phone:nth-child(3) { transform: translateX(-3%) rotate(7deg) scale(0.92); }
+}
+@media (min-width: 901px) {
+  .showcase .sc-phones .phone, .case-img .sc-phones .phone { --sw: clamp(96px, 11vw, 150px); }
 }
