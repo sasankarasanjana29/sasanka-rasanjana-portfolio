@@ -141,6 +141,9 @@ if (zoomable.length) {
   addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 }
 
+// Web page cards: the button opens the whole page in the lightbox.
+document.querySelectorAll('.web-more').forEach((b) => b.addEventListener('click', () => b.parentElement.querySelector('.frame-body img')?.click()));
+
 // Screen rails: arrow buttons move one screen at a time.
 document.querySelectorAll('.group').forEach((g) => {
   const rail = g.querySelector('.rail');
@@ -347,15 +350,15 @@ document.querySelectorAll('.demo').forEach((demo) => {
 // with their icons.
 const PROJECTS = {
   work: [
-    ['trustbank', 'TrustBank', 'Mobile banking, research case study', 'screens/trust-08-home-1-300.webp', '#f5b400'],
-    ['vela', 'VELA', 'E-commerce app, research case study', 'screens/vela-04-home-1-300.webp', '#2cc3ae'],
-    ['keells', 'Keells redesign', 'Grocery app concept, 100k+ reach', 'apps/keells-06-300.webp', '#1f9d3a'],
-    ['zestbowls', 'ZestBowls', 'Healthy meal ordering web app', 'zest-peek.webp', '#1a8e44'],
+    ['trustbank', 'TrustBank', 'Mobile banking, research case study', 'screens/trust-08-home-1-300.webp', '#fff3cc'],
+    ['vela', 'VELA', 'E-commerce app, research case study', 'screens/vela-04-home-1-300.webp', '#dcf5f0'],
+    ['keells', 'Keells redesign', 'Grocery app concept, 100k+ reach', 'apps/keells-06-300.webp', '#e1f3e4'],
+    ['zestbowls', 'ZestBowls', 'Healthy meal ordering web app', 'zest-peek-cart.webp', '#e6f3df'],
   ],
   apps: [
-    ['cloudia', 'Cloudia', 'Owe-and-owed tracker, iOS', 'apps/cloudia-today-300.webp', '#2f7cf6'],
-    ['pouch', 'Pouch', 'Calm budgeting app, iOS', 'apps/pouch-today-300.webp', '#6c4cf5'],
-    ['fretbelly', 'Fretbelly', 'Worry app with a creature, iOS', 'apps/fret-home-300.webp', '#3f3486'],
+    ['cloudia', 'Cloudia', 'Owe-and-owed tracker, iOS', 'apps/cloudia-today-300.webp', '#e1edff'],
+    ['pouch', 'Pouch', 'Calm budgeting app, iOS', 'apps/pouch-today-300.webp', '#ebe6ff'],
+    ['fretbelly', 'Fretbelly', 'Worry app with a creature, iOS', 'apps/fret-home-300.webp', '#e7e4f8'],
   ],
 };
 if (navEl) {
@@ -367,7 +370,7 @@ if (navEl) {
   const peek = ([slug, name, , shot, tint]) => {
     const web = !shot.includes('/');
     const media = web
-      ? `<div class="np-web"><div class="np-web-bar"><i></i><i></i><i></i></div><img data-src="${img(shot)}" alt=""></div>`
+      ? `<div class="np-card"><img data-src="${img(shot)}" alt=""></div>`
       : `<div class="phone"><div class="screen"><img data-src="${img(shot)}" alt=""></div></div>`;
     return `<div class="np-peek" data-slug="${slug}" style="--tint:${tint}" aria-hidden="true">${media}</div>`;
   };
