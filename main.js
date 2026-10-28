@@ -222,3 +222,30 @@ if (spot) {
   setTimeout(() => load(1), 1500);
   auto();
 }
+
+// Phone and tablet menu: a button in the nav pill opens a small panel with the
+// same links. Built here so every page gets it from the same markup.
+const navEl = document.getElementById('nav');
+const navLinks = navEl?.querySelector('.nav-links');
+if (navEl && navLinks) {
+  const btn = document.createElement('button');
+  btn.className = 'nav-menu-btn';
+  btn.setAttribute('aria-label', 'Menu');
+  btn.setAttribute('aria-expanded', 'false');
+  btn.setAttribute('aria-controls', 'nav-panel');
+  btn.innerHTML = '<span></span><span></span>';
+  const panel = document.createElement('div');
+  panel.className = 'nav-panel';
+  panel.id = 'nav-panel';
+  panel.innerHTML = [...navLinks.querySelectorAll('a')].map((a) => `<a href="${a.getAttribute('href')}">${a.textContent}</a>`).join('');
+  navEl.append(panel);
+  navEl.querySelector('.btn').after(btn);
+  const set = (open) => {
+    btn.setAttribute('aria-expanded', String(open));
+    navEl.classList.toggle('is-open', open);
+  };
+  btn.addEventListener('click', (e) => { e.stopPropagation(); set(btn.getAttribute('aria-expanded') !== 'true'); });
+  panel.addEventListener('click', (e) => { if (e.target.closest('a')) set(false); });
+  document.addEventListener('click', (e) => { if (!e.target.closest('#nav')) set(false); });
+  addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+}

@@ -860,3 +860,53 @@ html.lenis, html.lenis body { height: auto; }
 .shots img.plain { outline: 1px solid rgba(20, 20, 20, 0.08); outline-offset: -1px; }
 .frame-body { background: #fff; }
 .frame-scroll { max-width: 925px; margin-inline: auto; }
+
+/* ---------- phone and tablet menu ---------- */
+.nav-menu-btn { display: none; width: 38px; height: 38px; border-radius: 50%; place-items: center; align-content: center; gap: 5px; background: rgba(20, 20, 20, 0.05); transition: transform 160ms var(--ease-out), background-color 200ms ease; }
+.nav-menu-btn:active { transform: scale(0.94); }
+.nav-menu-btn span { display: block; width: 16px; height: 1.8px; border-radius: 2px; background: var(--ink); transition: transform 250ms var(--ease-out); }
+.nav.is-open .nav-menu-btn span:first-child { transform: translateY(3.4px) rotate(45deg); }
+.nav.is-open .nav-menu-btn span:last-child { transform: translateY(-3.4px) rotate(-45deg); }
+.nav-panel {
+  position: absolute; top: calc(100% + 8px); right: 0; min-width: 200px; padding: 6px; border-radius: 20px;
+  display: grid; background: rgba(255, 255, 255, 0.96); -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  box-shadow: inset 0 0 0 1px var(--line), 0 18px 40px -16px rgba(0, 0, 0, 0.25);
+  transform-origin: top right; opacity: 0; transform: scale(0.96) translateY(-4px); visibility: hidden; pointer-events: none;
+  transition: opacity 180ms ease, transform 200ms var(--ease-out), visibility 0s 200ms;
+}
+.nav.is-open .nav-panel { opacity: 1; transform: none; visibility: visible; pointer-events: auto; transition: opacity 180ms ease, transform 200ms var(--ease-out); }
+.nav-panel a { padding: 12px 14px; border-radius: 14px; font-size: 16px; font-weight: 500; color: var(--ink); transition: background-color 150ms ease; }
+.nav-panel a:active { background: rgba(20, 20, 20, 0.06); }
+@media (hover: hover) { .nav-panel a:hover { background: rgba(20, 20, 20, 0.05); } }
+@media (max-width: 900px) {
+  .nav { gap: 8px; width: calc(100% - 32px); max-width: 560px; justify-content: space-between; }
+  .nav-links { display: none; }
+  .nav-menu-btn { display: grid; margin-left: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .nav-panel, .nav.is-open .nav-panel, .nav-menu-btn span { transition: none; } }
+
+/* cards: columns may shrink, phones scale with the screen, chips wrap,
+   so nothing is ever pushed past a card's edge at in-between widths */
+.showcase { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); }
+.case, .case-wide { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.sc-copy, .case-text { min-width: 0; }
+.sc-phones, .case-img .sc-phones { min-width: 0; }
+.showcase .sc-phones .phone, .case-img .sc-phones .phone { --sw: clamp(96px, 13vw, 176px); }
+.sc-lede .chip, .case .chip { white-space: normal; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.sc-state { white-space: nowrap; }
+@media (max-width: 900px) {
+  .showcase, .case, .case-wide { grid-template-columns: minmax(0, 1fr); }
+  .showcase .sc-phones .phone, .case-img .sc-phones .phone { --sw: clamp(96px, 28vw, 150px); }
+}
+/* case pages: cover, prototype and next-card phones scale between 900 and 1300px too */
+@media (min-width: 901px) {
+  .cs-phones .phone { --sw: clamp(110px, 12.5vw, 168px); }
+  .proto-media .phone { --sw: clamp(100px, 10.5vw, 140px); }
+  .next-media .sc-phones .phone { --sw: clamp(96px, 10vw, 130px); }
+}
+
+/* phone and tablet: Resume sits just before the menu button, which takes the corner */
+@media (max-width: 900px) {
+  .nav > .btn { margin-left: auto; }
+  .nav-menu-btn { margin-left: 0; }
+}
