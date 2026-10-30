@@ -379,8 +379,8 @@ const PROJECTS = {
     ['zestbowls', 'ZestBowls', 'Healthy meal ordering web app', 'zest-peek-cart.webp', '#e6f3df'],
   ],
   apps: [
-    ['cloudia', 'Cloudia', 'Owe-and-owed tracker, iOS', 'apps/cloudia-today-300.webp', '#e1edff'],
     ['pouch', 'Pouch', 'Calm budgeting app, iOS', 'apps/pouch-today-300.webp', '#ebe6ff'],
+    ['cloudia', 'Cloudia', 'Owe-and-owed tracker, iOS', 'apps/cloudia-today-300.webp', '#e1edff'],
     ['fretbelly', 'Fretbelly', 'Worry app with a creature, iOS', 'apps/fret-home-300.webp', '#e7e4f8'],
   ],
 };
