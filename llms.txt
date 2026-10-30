@@ -1,0 +1,19 @@
+# Sasanka Rasanjana
+
+> UX/UI and product designer in Colombo, Sri Lanka. Associate UX/UI Designer at Dinetap since December 2025 (intern from April 2025), working on a consumer app, a merchant dashboard and a POS, and running their design system. Also designs and builds his own iOS apps with React Native and Claude Code. BSc (Hons) Industrial Information Technology, Uva Wellassa University of Sri Lanka, GPA 3.74, First Class Honours.
+
+## Case studies
+- [TrustBank](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/trustbank.html): mobile banking app concept from his thesis research; safer transfers, receipts and security alerts.
+- [VELA](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/vela.html): e-commerce app from his thesis research; about 300 survey responses, 9 expert interviews and a 60 person usability pilot.
+- [Keells redesign](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/keells.html): unofficial grocery app redesign concept; 100,000+ LinkedIn impressions.
+- [ZestBowls](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/zestbowls.html): healthy meal ordering web app.
+
+## Apps he designed and built
+- [Cloudia](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/cloudia.html): iOS app for small promises, what you owe and what you are owed. Website: https://sasankarasanjana29.github.io/cloudia-site/
+- [Pouch](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/pouch.html): free, private budgeting app for iPhone with no bank login; 13 languages. Website: https://sasankarasanjana29.github.io/hedge-site/
+- [Fretbelly](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/fretbelly.html): worry app with a small creature that checks how few worries come true.
+
+## Contact
+- Email: sasanka.rasanjana29@gmail.com
+- LinkedIn: https://www.linkedin.com/in/sasanka-rasanjana
+- Resume: https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/Sasanka_Rasanjana_CV.pdf
