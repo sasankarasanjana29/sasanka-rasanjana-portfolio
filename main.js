@@ -140,19 +140,37 @@ if (zoomable.length) {
   // far taller than a phone, keeps its width and scrolls, since shrunk to fit it would be unreadable.
   let full = false;
   big.addEventListener('load', () => big.classList.toggle('fit', !full && big.naturalHeight / big.naturalWidth < 2.6));
-  const show = (i, dir = 0) => {
+  const srcOf = (img) => (img.getAttribute('src').startsWith('..') ? new URL(img.getAttribute('src'), location.href).href : img.src);
+  const warm = (i) => { if (zoomable[i]) new Image().src = srcOf(zoomable[i]); };
+  let token = 0;
+  // Moving on: the next image is loaded and decoded first, the current one slides out, then the new
+  // one slides in from the side you moved towards. Nothing ever blanks, and quick presses just skip ahead.
+  const show = async (i, dir = 0) => {
     at = Math.max(0, Math.min(zoomable.length - 1, i));
     const img = zoomable[at];
-    full = img.hasAttribute('data-full');
-    big.classList.toggle('fit', !full);
-    big.removeAttribute('srcset');
-    big.src = img.getAttribute('src').startsWith('..') ? new URL(img.getAttribute('src'), location.href).href : img.src;
-    big.alt = img.alt;
-    box.scrollTop = 0;
+    const my = ++token;
     prevBtn.disabled = at === 0;
     nextBtn.disabled = at === zoomable.length - 1;
     count.textContent = `${at + 1} / ${zoomable.length}`;
-    if (dir && !reduce) big.animate([{ opacity: 0, transform: `translateX(${dir * 28}px)` }, { opacity: 1, transform: 'none' }], { duration: 240, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    const url = srcOf(img);
+    const pre = new Image();
+    pre.src = url;
+    const slide = dir && !reduce;
+    big.getAnimations().forEach((a) => a.cancel());
+    const out = slide ? big.animate([{ opacity: 1, transform: 'none' }, { opacity: 0, transform: `translateX(${-dir * 36}px) scale(0.985)` }], { duration: 130, easing: 'cubic-bezier(0.4, 0, 1, 1)', fill: 'forwards' }) : null;
+    // Opening (no direction) shows the image straight away; only stepping waits for the next one.
+    if (slide) await Promise.all([pre.decode().catch(() => {}), out.finished.catch(() => {})]);
+    if (my !== token) return;
+    full = img.hasAttribute('data-full');
+    big.classList.toggle('fit', !full);
+    big.removeAttribute('srcset');
+    big.src = url;
+    big.alt = img.alt;
+    box.scrollTop = 0;
+    out?.cancel();
+    if (slide) big.animate([{ opacity: 0, transform: `translateX(${dir * 36}px) scale(0.985)` }, { opacity: 1, transform: 'none' }], { duration: 280, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+    warm(at + 1);
+    warm(at - 1);
   };
   const step = (d) => { if (at + d >= 0 && at + d < zoomable.length) show(at + d, d); };
   zoomable.forEach((img, i) => img.addEventListener('click', () => {
