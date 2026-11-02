@@ -16,7 +16,7 @@
   --white: #ffffff;
   --ink: #141414;
   --ink-2: #55565a;
-  --ink-3: #8b8c90;
+  --ink-3: #65666a; /* passes 4.5:1 on white and every pale project tint */
   --line: rgba(20, 20, 20, 0.08);
   --accent: #5b3df5;
   --live: #22c55e;
