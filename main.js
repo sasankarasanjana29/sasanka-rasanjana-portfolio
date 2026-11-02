@@ -115,36 +115,69 @@ if (toc.length) {
   byId.forEach((_, id) => { const s = document.getElementById(id); if (s) io.observe(s); });
 }
 
-// Case pages: tap a board to read it full width.
-const zoomable = document.querySelectorAll('.rail img, .frame img, .shots img, .reviews img');
+// Case pages: tap a screen or board to see it whole. Arrows, the arrow keys and a sideways
+// swipe step through every image on the page, so nobody has to close and pick the next one.
+const zoomable = [...document.querySelectorAll('.rail img, .frame img, .shots img, .reviews img')];
 if (zoomable.length) {
   const box = document.createElement('div');
   box.className = 'lightbox';
   box.setAttribute('role', 'dialog');
   box.setAttribute('data-lenis-prevent', '');
   box.setAttribute('aria-label', 'Enlarged image');
-  box.innerHTML = '<button aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button><img alt="">';
+  const chev = (d) => `<svg viewBox="0 0 24 24"><path d="${d}"/></svg>`;
+  box.innerHTML = `<button class="lb-close" aria-label="Close">${chev('M6 6l12 12M18 6 6 18')}</button>`
+    + `<button class="lb-prev" aria-label="Previous image">${chev('M15 5l-7 7 7 7')}</button>`
+    + `<button class="lb-next" aria-label="Next image">${chev('M9 5l7 7-7 7')}</button>`
+    + '<span class="lb-count" aria-live="polite"></span><img alt="">';
   document.body.append(box);
   const big = box.querySelector('img');
+  const [closeBtn, prevBtn, nextBtn] = box.querySelectorAll('button');
+  const count = box.querySelector('.lb-count');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let at = 0;
   const close = () => { box.classList.remove('is-open'); document.body.style.overflow = ''; window.__lenis?.start(); };
   // Phone screens and boards fit the window whole. A full web page capture (data-full), or anything
   // far taller than a phone, keeps its width and scrolls, since shrunk to fit it would be unreadable.
   let full = false;
   big.addEventListener('load', () => big.classList.toggle('fit', !full && big.naturalHeight / big.naturalWidth < 2.6));
-  zoomable.forEach((img) => img.addEventListener('click', () => {
+  const show = (i, dir = 0) => {
+    at = Math.max(0, Math.min(zoomable.length - 1, i));
+    const img = zoomable[at];
     full = img.hasAttribute('data-full');
     big.classList.toggle('fit', !full);
     big.removeAttribute('srcset');
     big.src = img.getAttribute('src').startsWith('..') ? new URL(img.getAttribute('src'), location.href).href : img.src;
     big.alt = img.alt;
     box.scrollTop = 0;
+    prevBtn.disabled = at === 0;
+    nextBtn.disabled = at === zoomable.length - 1;
+    count.textContent = `${at + 1} / ${zoomable.length}`;
+    if (dir && !reduce) big.animate([{ opacity: 0, transform: `translateX(${dir * 28}px)` }, { opacity: 1, transform: 'none' }], { duration: 240, easing: 'cubic-bezier(0.23, 1, 0.32, 1)' });
+  };
+  const step = (d) => { if (at + d >= 0 && at + d < zoomable.length) show(at + d, d); };
+  zoomable.forEach((img, i) => img.addEventListener('click', () => {
+    show(i);
     box.classList.add('is-open');
     document.body.style.overflow = 'hidden';
     window.__lenis?.stop();
-    box.querySelector('button').focus();
+    closeBtn.focus();
   }));
+  prevBtn.addEventListener('click', (e) => { e.stopPropagation(); step(-1); });
+  nextBtn.addEventListener('click', (e) => { e.stopPropagation(); step(1); });
   box.addEventListener('click', close);
-  addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
+  addEventListener('keydown', (e) => {
+    if (!box.classList.contains('is-open')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'ArrowLeft') step(-1);
+    else if (e.key === 'ArrowRight') step(1);
+  });
+  // A mostly sideways swipe moves on; an up or down drag is left alone for scrolling a long page.
+  let sx = 0, sy = 0, st = 0;
+  box.addEventListener('touchstart', (e) => { sx = e.touches[0].clientX; sy = e.touches[0].clientY; st = Date.now(); }, { passive: true });
+  box.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.4 && Date.now() - st < 700) step(dx < 0 ? 1 : -1);
+  }, { passive: true });
 }
 
 // Web page cards: the button opens the whole page in the lightbox.
