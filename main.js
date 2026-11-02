@@ -127,7 +127,13 @@ if (zoomable.length) {
   document.body.append(box);
   const big = box.querySelector('img');
   const close = () => { box.classList.remove('is-open'); document.body.style.overflow = ''; window.__lenis?.start(); };
+  // Phone screens and boards fit the window whole. A full web page capture (data-full), or anything
+  // far taller than a phone, keeps its width and scrolls, since shrunk to fit it would be unreadable.
+  let full = false;
+  big.addEventListener('load', () => big.classList.toggle('fit', !full && big.naturalHeight / big.naturalWidth < 2.6));
   zoomable.forEach((img) => img.addEventListener('click', () => {
+    full = img.hasAttribute('data-full');
+    big.classList.toggle('fit', !full);
     big.removeAttribute('srcset');
     big.src = img.getAttribute('src').startsWith('..') ? new URL(img.getAttribute('src'), location.href).href : img.src;
     big.alt = img.alt;

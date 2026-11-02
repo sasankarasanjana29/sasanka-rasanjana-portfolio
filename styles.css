@@ -413,6 +413,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .lightbox.is-open { opacity: 1; visibility: visible; transition: opacity 250ms ease; }
 .lightbox img { max-width: min(1400px, 100%); max-height: none; border-radius: 16px; transform: scale(0.96); transition: transform 400ms var(--ease-out); }
 .lightbox.is-open img { transform: none; }
+.lightbox img.fit { width: auto; max-width: 100%; max-height: calc(100dvh - 48px); object-fit: contain; }
 .lightbox button { position: fixed; top: 16px; right: 16px; width: 44px; height: 44px; border-radius: 50%; background: #fff; color: var(--ink); display: grid; place-items: center; }
 .lightbox button svg { width: 18px; height: 18px; }
 
