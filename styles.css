@@ -99,7 +99,10 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
   font-size: 13px; color: var(--ink-2);
   padding: 6px 12px; border-radius: 999px; background: var(--white);
 }
-.status i { width: 7px; height: 7px; border-radius: 50%; background: var(--live); animation: pulse 2.4s ease-out infinite; }
+.status i { position: relative; width: 7px; height: 7px; border-radius: 50%; background: var(--live); }
+/* the ping grows and fades on transform and opacity only, so it never repaints */
+.status i::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: rgba(34, 197, 94, 0.45); animation: ping 2.4s ease-out infinite; }
+@keyframes ping { 0% { transform: scale(1); opacity: 1; } 70%, 100% { transform: scale(3); opacity: 0; } }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.45); } 70%, 100% { box-shadow: 0 0 0 7px rgba(34, 197, 94, 0); } }
 
 .hero-name {
@@ -109,7 +112,8 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .hero-name .w { display: inline-block; white-space: nowrap; }
 .ch { display: inline-block; transition: transform 400ms var(--ease-out), color 300ms ease; }
 .js .ch { animation: letter 800ms var(--ease-out) both; animation-delay: calc(var(--i) * 30ms); }
-@keyframes letter { from { opacity: 0; transform: translateY(0.4em); } }
+/* 0.001, not 0: looks the same, but the browser counts the name as painted at once (faster LCP) */
+@keyframes letter { from { opacity: 0.001; transform: translateY(0.4em); } }
 /* pointing at the name sends one soft wave through the letters */
 .hero-name.is-ready .ch { animation: none; }
 .hero-name.is-ready.is-waving .ch { animation: wave 700ms var(--ease-out) both; animation-delay: calc(var(--i) * 26ms); }
@@ -139,7 +143,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 
 /* load-in and scroll reveal */
 .js [data-rise] { animation: rise 700ms var(--ease-out) both; animation-delay: var(--d, 0ms); }
-@keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+@keyframes rise { from { opacity: 0.001; transform: translateY(14px); } }
 .js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); transition-delay: var(--stagger, 0ms); }
 .js [data-reveal].is-in { opacity: 1; transform: none; }
 
@@ -315,7 +319,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .copy-done { position: absolute; inset: 0; display: grid; place-items: center; transform: translateY(100%); opacity: 0; }
 .copy.is-done .copy-label { transform: translateY(-100%); opacity: 0; }
 .copy.is-done .copy-done { transform: none; opacity: 1; }
-.footer-note { text-align: center; margin-top: 28px; font-size: 13px; color: var(--ink-3); }
+.footer-note { text-align: center; margin-top: 28px; font-size: 13px; color: var(--ink-2); }
 
 /* ======================================================================
    Case study pages. The theme comes from the body class.
@@ -474,7 +478,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .js [data-rise], .js .ch, .status i, .reel-track { animation: none; }
+  .js [data-rise], .js .ch, .status i, .status i::after, .reel-track { animation: none; }
   .js [data-reveal] { opacity: 1; transform: none; transition: none; }
   .case-img, .phone, .rail img, .tools img, .timeline::after { transition: none; }
 }
