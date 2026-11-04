@@ -1,6 +1,6 @@
 # Sasanka Rasanjana
 
-> UX/UI and product designer in Colombo, Sri Lanka. Associate UX/UI Engineer at Dinetap since December 2025, a design role (intern from April 2025), working on a consumer app, a merchant dashboard and a POS, and running their design system. Also designs and builds his own iOS apps with React Native and Claude Code. BSc (Hons) Industrial Information Technology, Uva Wellassa University of Sri Lanka, GPA 3.74, First Class Honours. Open to on-site roles in Sri Lanka and remote roles worldwide.
+> UX/UI and product designer in Colombo, Sri Lanka. Associate UX/UI Engineer at Dinetap since December 2025 and Intern UX/UI Engineer from April 2025, both design roles, working on a consumer app, a merchant dashboard and a POS, and running their design system. Also designs and builds his own iOS apps with React Native and Claude Code. BSc (Hons) Industrial Information Technology, Uva Wellassa University of Sri Lanka, GPA 3.74, First Class Honours. Open to on-site roles in Sri Lanka and remote roles worldwide.
 
 ## Case studies
 - [TrustBank](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/trustbank.html): mobile banking app concept he designed from his team thesis research; safer transfers, receipts and security alerts.
