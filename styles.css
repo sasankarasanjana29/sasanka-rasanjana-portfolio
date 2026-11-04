@@ -1077,4 +1077,5 @@ html.lenis, html.lenis body { height: auto; }
 .cs-note { margin-top: 12px; font-size: 13px; line-height: 1.5; color: var(--ink-3); max-width: 48ch; }
 
 /* Dinetap: my job, a short card with screens from the live app */
+.case-note { margin: 14px 0 0; font-size: 13px; line-height: 1.5; color: var(--t-ink); max-width: 40ch; }
 .case-dinetap { --brand: #fe4200; --t-bg: linear-gradient(180deg, #fff3ec, #ffe3d6); --t-dot: rgba(254, 66, 0, 0.22); --t-ink: #9a2c00; --chip-bg: #ffd2bf; --chip-ink: #7a2200; --t-btn: #b83200; --t-btn-ink: #fff; --fx-dot: rgba(184, 50, 0, 0.2); --fx-ring: rgba(184, 50, 0, 0.05); --fx-glow: rgba(255, 255, 255, 0.7); }
