@@ -342,6 +342,7 @@ svg { width: 1em; height: 1em; fill: none; stroke: currentColor; stroke-width: 2
 .facts div { padding: 10px 0; border-top: 1px solid rgba(20, 20, 20, 0.1); }
 .facts dt { font-size: 12.5px; color: var(--ink-2); }
 .facts dd { margin: 2px 0 0; font-weight: 500; font-size: 15px; }
+.cs-site { margin-top: 24px; }
 .cs-cover { align-self: end; }
 .cs-cover img { width: 100%; max-width: 560px; margin: 0 auto; }
 .cs-cover.is-wide { align-self: center; padding-bottom: 40px; }
