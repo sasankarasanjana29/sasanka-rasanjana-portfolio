@@ -1080,3 +1080,23 @@ html.lenis, html.lenis body { height: auto; }
 /* Dinetap: my job, a short card with screens from the live app */
 .case-note { margin: 14px 0 0; font-size: 13px; line-height: 1.5; color: var(--t-ink); max-width: 40ch; }
 .case-dinetap { --brand: #fe4200; --t-bg: linear-gradient(180deg, #fff3ec, #ffe3d6); --t-dot: rgba(254, 66, 0, 0.22); --t-ink: #9a2c00; --chip-bg: #ffd2bf; --chip-ink: #7a2200; --t-btn: #b83200; --t-btn-ink: #fff; --fx-dot: rgba(184, 50, 0, 0.2); --fx-ring: rgba(184, 50, 0, 0.05); --fx-glow: rgba(255, 255, 255, 0.7); }
+
+/* Problem charts: bars start at zero on one scale */
+.bars { margin: 0; background: var(--t-soft); border-radius: 24px; padding: 24px; }
+.bars h3 { font-size: 17px; letter-spacing: -0.01em; margin: 0; }
+.bars figcaption p { margin: 4px 0 0; color: var(--ink-2); font-size: 14px; }
+.bars ol { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 16px; }
+.bars li { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "l v" "t t"; gap: 7px 12px; align-items: end; }
+.bars .bl { grid-area: l; font-size: 15px; color: var(--ink); }
+.bars b { grid-area: v; font-family: var(--display); font-size: 18px; font-weight: 600; font-variant-numeric: tabular-nums; color: var(--t-ink); }
+.bars .bt { grid-area: t; height: 12px; border-radius: 99px; background: rgba(255, 255, 255, 0.85); overflow: hidden; }
+.bars i { display: block; height: 100%; width: var(--w); border-radius: inherit; background: var(--t); transform-origin: left; }
+.bars-note { margin: 20px 0 0; padding-top: 16px; border-top: 1px solid rgba(0, 0, 0, 0.08); font-size: 15px; color: var(--ink-2); }
+.cs-sec > .bars { margin-top: 14px; }
+@media (prefers-reduced-motion: no-preference) {
+  .js .bars i { transform: scaleX(0); transition: transform 900ms cubic-bezier(0.22, 1, 0.36, 1) 150ms; }
+  .js .bars.is-in i { transform: none; }
+}
+/* What I cut and why */
+.tile.cut ul { list-style: none; padding: 0; gap: 10px; }
+.tile.cut li b { display: block; font-size: 13px; color: var(--t-ink); font-weight: 600; }

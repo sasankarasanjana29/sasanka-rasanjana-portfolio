@@ -8,6 +8,10 @@
 - [Keells redesign](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/keells.html): unofficial grocery app redesign concept; 100,000+ LinkedIn impressions.
 - [ZestBowls](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/zestbowls.html): healthy meal ordering web app.
 
+## At Dinetap
+- [Dinetap website](https://dinetap.com/): the company website for Singapore and Australia (https://dinetap.au/), which he designed and built with Claude Code.
+- [Dinetap app](https://apps.apple.com/app/dinetap/id6743796462): the live restaurant discovery app he designs with the engineering team.
+
 ## Apps he designed and built
 - [Pouch](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/pouch.html): free, private budgeting app for iPhone with no bank login; 13 languages. Website: https://sasankarasanjana29.github.io/hedge-site/
 - [Cloudia](https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/cloudia.html): iOS app for small promises, what you owe and what you are owed. Website: https://sasankarasanjana29.github.io/cloudia-site/
