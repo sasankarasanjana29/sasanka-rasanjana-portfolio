@@ -1431,3 +1431,26 @@ html.lenis, html.lenis body { height: auto; }
   .vw-row .n { display: inline-grid; width: 18px; height: 18px; font-size: 10.5px; }
   .viewer { padding: 18px 14px 22px; }
 }
+
+/* Comparison on phones and narrow windows: one stacked block per topic */
+@media (max-width: 760px) {
+  .cmp { padding: 4px 0; background: var(--card); }
+  .cmp::after { display: none; }
+  .cmp-head { display: none !important; }
+  .cmp-row { grid-template-columns: minmax(0, 1fr) !important; padding: 16px 18px; gap: 4px; }
+  .cmp-row + .cmp-row { border-top: 1px solid var(--line); }
+  .cmp-row > span, .cmp-row + .cmp-row > span:not(.cmp-us), .cmp-row + .cmp-row > .cmp-us { padding: 0 !important; border-top: 0 !important; background: none !important; }
+  .cmp-topic { font-size: 13px; font-weight: 700; color: var(--t-ink); grid-column: auto !important; }
+  .cmp-us { order: 2; font-size: 16.5px; color: var(--ink); }
+  .cmp-them { order: 3; font-size: 14px; text-decoration: none; color: var(--ink-3); }
+  .cmp-them::before { content: "Others:\00a0"; font-weight: 600; color: var(--ink-2); }
+}
+@media (max-width: 760px) { .cmp-head + .cmp-row { border-top: 0 !important; } .cmp-head + .cmp-row > span { border-top: 0 !important; } }
+/* Cuts on phones: amounts stay on one line, both panels the same height */
+.ba-pair { align-items: stretch; }
+.mini-big { white-space: nowrap; }
+@media (max-width: 760px) {
+  .mini-big { font-size: clamp(20px, 6vw, 28px); }
+  .ba-side { min-height: 0; padding: 38px 14px 16px; }
+  .mini-l { font-size: 12.5px; }
+}
