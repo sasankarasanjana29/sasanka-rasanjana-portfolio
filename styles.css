@@ -1454,3 +1454,4 @@ html.lenis, html.lenis body { height: auto; }
   .ba-side { min-height: 0; padding: 38px 14px 16px; }
   .mini-l { font-size: 12.5px; }
 }
+.vw-row img, .hs .screen img, .tv-screen img { cursor: zoom-in; }

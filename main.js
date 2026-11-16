@@ -117,7 +117,7 @@ if (toc.length) {
 
 // Case pages: tap a screen or board to see it whole. Arrows, the arrow keys and a sideways
 // swipe step through every image on the page, so nobody has to close and pick the next one.
-const zoomable = [...document.querySelectorAll('.rail img, .frame img, .shots img, .reviews img')];
+const zoomable = [...document.querySelectorAll('.rail img, .frame img, .shots img, .reviews img, .vw-row img, .hs .screen img, .tv-screen img')];
 if (zoomable.length) {
   const box = document.createElement('div');
   box.className = 'lightbox';
@@ -174,6 +174,7 @@ if (zoomable.length) {
   };
   const step = (d) => { if (at + d >= 0 && at + d < zoomable.length) show(at + d, d); };
   zoomable.forEach((img, i) => img.addEventListener('click', () => {
+    img.closest('.viewer')?.dispatchEvent(new CustomEvent('vw-stop'));
     show(i);
     box.classList.add('is-open');
     document.body.style.overflow = 'hidden';
@@ -561,6 +562,7 @@ document.querySelectorAll('.viewer').forEach((v) => {
   const start = () => { if (stopped || timer) return; v.style.setProperty('--vw-step', STEP + 'ms'); v.classList.add('is-auto'); timer = setInterval(next, STEP); };
   const pause = () => { clearInterval(timer); timer = 0; v.classList.remove('is-auto'); };
   tabs.forEach((t) => t.addEventListener('click', (ev) => { if (ev.isTrusted) { stopped = true; pause(); } }));
+  v.addEventListener('vw-stop', () => { stopped = true; pause(); });
   v.addEventListener('mouseenter', pause);
   v.addEventListener('mouseleave', start);
   new IntersectionObserver(([e]) => { if (e.isIntersecting) start(); else pause(); }, { threshold: 0.4 }).observe(v);
