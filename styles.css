@@ -1420,3 +1420,14 @@ html.lenis, html.lenis body { height: auto; }
 .tv-out p { margin: 0; padding: 12px 14px; border-radius: 14px; background: #fff; font-size: 15px; line-height: 1.4; color: var(--ink); }
 .tv-out i { display: block; font-style: normal; font-size: 12px; font-weight: 700; color: var(--t-ink); margin-bottom: 2px; }
 @media (max-width: 900px) { .tvs { grid-template-columns: minmax(0, 1fr); } .tv { grid-template-columns: auto minmax(0, 1fr); grid-template-areas: "find find" "screen out"; } .tv-find { grid-area: find; } .tv-screen { grid-area: screen; } .tv-out { grid-area: out; align-content: center; } .tv-screen .phone { --sw: 120px; } }
+
+/* Phones: the screen viewer is a swipe row, two phones in view, captions under each */
+@media (max-width: 760px) {
+  .vw-row, .vw-row.is-rail { display: flex; gap: 14px; overflow-x: auto; justify-content: flex-start; scroll-snap-type: x mandatory; padding: 4px 2px 12px; scrollbar-width: none; }
+  .vw-row::-webkit-scrollbar { display: none; }
+  .vw-row figure, .vw-row.is-rail figure { flex: none; width: 46%; min-width: 0; scroll-snap-align: start; gap: 12px; }
+  .vw-row .phone { --sw: 100%; width: 100%; }
+  .vw-row figcaption { max-width: none; width: 100%; font-size: 13px; gap: 6px; }
+  .vw-row .n { display: inline-grid; width: 18px; height: 18px; font-size: 10.5px; }
+  .viewer { padding: 18px 14px 22px; }
+}
