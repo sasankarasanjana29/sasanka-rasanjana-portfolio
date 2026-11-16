@@ -344,10 +344,18 @@ document.querySelectorAll('.demo').forEach((demo) => {
   const at = items.map((li) => parseFloat(li.dataset.at) || 0);
   let only = -1;
   const end = (i) => (i + 1 < at.length ? at[i + 1] : video.duration || Infinity);
+  const caption = demo.querySelector('.demo-caption');
   const light = () => {
     let k = only;
     if (k < 0) at.forEach((t, i) => { if (video.currentTime >= t - 0.05) k = i; });
-    items.forEach((li, i) => li.classList.toggle('is-on', i === Math.max(k, 0)));
+    k = Math.max(k, 0);
+    items.forEach((li, i) => {
+      li.classList.toggle('is-on', i === k);
+      // story bars: done before the current chapter, filling in it, empty after
+      const p = i < k ? 1 : i > k ? 0 : Math.min(1, Math.max(0, (video.currentTime - at[i]) / ((end(i) - at[i]) || 1)));
+      li.style.setProperty('--p', p.toFixed(3));
+    });
+    if (caption) caption.textContent = items[k].querySelector('.d')?.textContent || '';
   };
   // keep a looping part inside its own span, checked every frame while playing
   let raf = 0;
@@ -364,7 +372,7 @@ document.querySelectorAll('.demo').forEach((demo) => {
   all.type = 'button';
   all.className = 'demo-all';
   all.textContent = 'Play all';
-  demo.querySelector('.demo-steps').after(all);
+  (demo.querySelector('.demo-caption') || demo.querySelector('.demo-steps')).after(all);
   // The whole clip (about 1 MB) is held in memory, so every jump plays from
   // memory at once, whatever the server or browser does with partial loads.
   let loading = null;
@@ -501,3 +509,69 @@ if (navEl) {
     }, { once: true });
   }
 }
+
+// Notes on screens: one switch shows or hides every note in that block
+document.querySelectorAll('.ann-toggle').forEach((b) => {
+  b.addEventListener('click', () => {
+    const block = b.closest('.ann-head')?.nextElementSibling;
+    if (!block) return;
+    const off = block.classList.toggle('notes-off');
+    b.setAttribute('aria-pressed', String(!off));
+    b.textContent = off ? 'Show notes' : 'Hide notes';
+  });
+});
+
+// Screen viewer: a tab shows its panel and hides the others
+document.querySelectorAll('.viewer').forEach((v) => {
+  const tabs = [...v.querySelectorAll('.vw-tab')];
+  const panels = [...v.querySelectorAll('.vw-panel')];
+  tabs.forEach((t, i) => t.addEventListener('click', () => {
+    tabs.forEach((x, j) => { x.classList.toggle('is-on', i === j); x.setAttribute('aria-selected', String(i === j)); });
+    panels.forEach((p, j) => p.classList.toggle('is-on', i === j));
+    panels[i].querySelectorAll('img[loading="lazy"]').forEach((img) => { img.loading = 'eager'; });
+  }));
+});
+// Load the hidden tabs' screens quietly once the page has settled, so switching tabs never shows empty phones
+addEventListener('load', () => setTimeout(() => {
+  document.querySelectorAll('.vw-panel img[loading="lazy"]').forEach((img) => { img.loading = 'eager'; });
+}, 1200));
+
+// One-phone viewer: a step swaps the screen in that tab's phone
+document.querySelectorAll('.vw-panel').forEach((panel) => {
+  const imgs = [...panel.querySelectorAll('.vw-phone img')];
+  const steps = [...panel.querySelectorAll('.vw-steps li')];
+  steps.forEach((li, i) => li.querySelector('button').addEventListener('click', () => {
+    steps.forEach((x, j) => x.classList.toggle('is-on', i === j));
+    imgs.forEach((x, j) => x.classList.toggle('is-on', i === j));
+  }));
+});
+
+// The viewer moves to the next tab by itself while it is on screen, with a thin clock bar.
+// It stops for good once someone picks a tab, and never runs with reduced motion.
+document.querySelectorAll('.viewer').forEach((v) => {
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const STEP = 4200;
+  let timer = 0, stopped = false;
+  const tabs = [...v.querySelectorAll('.vw-tab')];
+  const next = () => {
+    const t = tabs.findIndex((x) => x.classList.contains('is-on'));
+    tabs[(t + 1) % tabs.length].dispatchEvent(new CustomEvent('click', { detail: 'auto' }));
+    v.classList.remove('is-auto'); void v.offsetWidth; v.classList.add('is-auto');
+  };
+  const start = () => { if (stopped || timer) return; v.style.setProperty('--vw-step', STEP + 'ms'); v.classList.add('is-auto'); timer = setInterval(next, STEP); };
+  const pause = () => { clearInterval(timer); timer = 0; v.classList.remove('is-auto'); };
+  tabs.forEach((t) => t.addEventListener('click', (ev) => { if (ev.isTrusted) { stopped = true; pause(); } }));
+  v.addEventListener('mouseenter', pause);
+  v.addEventListener('mouseleave', start);
+  new IntersectionObserver(([e]) => { if (e.isIntersecting) start(); else pause(); }, { threshold: 0.4 }).observe(v);
+});
+
+// Hotspots: hovering or tapping a note lights up its numbered dot on the screen
+document.querySelectorAll('.hs').forEach((fig) => {
+  const dots = [...fig.querySelectorAll('.hs-dot')];
+  fig.querySelectorAll('.hs-list li').forEach((li) => {
+    const on = (v) => () => { dots.forEach((d) => d.classList.toggle('is-on', v && d.dataset.n === li.dataset.n)); li.classList.toggle('is-on', v); };
+    li.addEventListener('mouseenter', on(true)); li.addEventListener('mouseleave', on(false));
+    li.addEventListener('click', on(true));
+  });
+});
