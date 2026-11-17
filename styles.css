@@ -1404,6 +1404,9 @@ html.lenis, html.lenis body { height: auto; }
 .vw-row.is-rail { display: flex; gap: 24px; overflow-x: auto; justify-content: flex-start; padding: 4px 4px 14px; scroll-snap-type: x mandatory; scrollbar-width: thin; }
 .vw-row.is-rail figure { flex: none; scroll-snap-align: start; width: 236px; }
 .duo.one { grid-template-columns: minmax(0, 1fr); max-width: 760px; }
+/* An odd last recording (a third one) takes the whole row instead of sitting alone in one column */
+.duo > .demo.compact:nth-child(odd):last-child { grid-column: 1 / -1; }
+.duo > .demo.compact:nth-child(odd):last-child .demo-ctl { max-width: 360px; }
 @media (max-width: 760px) { .vw-row.is-rail figure { width: 120px; } .vw-row.is-rail { gap: 10px; } }
 .lns.four { grid-template-columns: repeat(4, minmax(0, 1fr)); } @media (max-width: 900px) { .lns.four { grid-template-columns: repeat(2, minmax(0, 1fr)); } } @media (max-width: 520px) { .lns.four { grid-template-columns: minmax(0, 1fr); } }
 .viewer, .vw-panel { min-width: 0; max-width: 100%; } .vw-row.is-rail { width: 100%; max-width: 100%; min-width: 0; }
