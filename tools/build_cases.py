@@ -709,7 +709,7 @@ def page(c):
   <link rel="preload" as="image" href="../img/phone-frame.webp" fetchpriority="high">
   <link rel="preload" href="../fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../styles.css?v=20261126a">
+  <link rel="stylesheet" href="../styles.css?v=20261126b">
   <script>document.documentElement.classList.add('js')</script>
   {jsonld(c, stitle, sdesc)}
 </head>
