@@ -1,0 +1,333 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sasanka Rasanjana, Portfolio</title>
+<style>
+@font-face { font-family: Inter; src: url(../site/fonts/inter-latin.woff2) format("woff2"); font-weight: 100 900; }
+@font-face { font-family: "Inter Tight"; src: url(../site/fonts/inter-tight-latin.woff2) format("woff2"); font-weight: 100 900; }
+@page { size: 1920px 1080px; margin: 0; }
+:root { --ink: #141414; --ink2: #55565a; --line: #e7e7ea; --card: #f5f5f3; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: #fff; }
+body { font-family: Inter, system-ui, sans-serif; color: var(--ink); -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.page { width: 1920px; height: 1080px; position: relative; overflow: hidden; page-break-after: always; padding: 96px 120px; display: grid; }
+h1, h2, h3, .big { font-family: "Inter Tight", Inter, sans-serif; letter-spacing: -0.03em; }
+h2 { font-size: 72px; line-height: 1.02; font-weight: 600; }
+h3 { font-size: 30px; font-weight: 600; letter-spacing: -0.015em; }
+p { font-size: 26px; line-height: 1.45; color: var(--ink2); }
+.meta { font-size: 22px; font-weight: 500; color: var(--t, var(--ink2)); margin-bottom: 22px; }
+.foot { position: absolute; left: 120px; right: 120px; bottom: 44px; display: flex; justify-content: space-between; font-size: 18px; color: #9a9ba0; }
+a { color: inherit; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.chip { background: var(--chip, #eee); color: var(--chipink, var(--ink)); border-radius: 18px; padding: 0 14px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.split { grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.phones { display: flex; justify-content: center; align-items: center; gap: 0; }
+.ph { width: 300px; position: relative; flex: none; aspect-ratio: 1350 / 2760; }
+.ph::after { content: ""; position: absolute; inset: 0; background: url(../site/img/phone-frame.webp) center / 100% 100% no-repeat; z-index: 2; }
+.ph.fade::before { content: ""; position: absolute; left: 5.333%; width: 89.333%; bottom: 2.464%; height: 4.4%; background: linear-gradient(rgba(255,255,255,0), #fff 55%); z-index: 1; border-radius: 0 0 40px 40px; }
+.ph img { position: absolute; top: 2.464%; left: 5.333%; width: 89.333%; height: 95.072%; object-fit: cover; object-position: top; border-radius: 12.5% / 5.8%; }
+.phones .ph:nth-child(1) { transform: translateX(40px) rotate(-5deg) scale(.88); }
+.phones .ph:nth-child(2) { z-index: 2; }
+.phones .ph:nth-child(3) { transform: translateX(-40px) rotate(5deg) scale(.88); }
+.spec { display: flex; gap: 48px; margin-top: 40px; }
+.spec div { display: grid; }
+.spec dt { font-size: 18px; color: var(--ink2); }
+.spec dd { font-family: "Inter Tight"; font-size: 40px; font-weight: 600; letter-spacing: -0.02em; color: var(--t, var(--ink)); }
+.bars { margin-top: 40px; background: var(--soft); border-radius: 28px; padding: 36px 40px; }
+.bars h3 { font-size: 24px; }
+.bars small { font-size: 18px; color: var(--ink2); }
+.bar { margin-top: 26px; }
+.bar .row { display: flex; justify-content: space-between; font-size: 21px; }
+.bar b { font-family: "Inter Tight"; font-size: 26px; color: var(--tink); }
+.track { margin-top: 8px; height: 14px; border-radius: 99px; background: rgba(255,255,255,.9); overflow: hidden; }
+.track i { display: block; height: 100%; background: var(--t); border-radius: 99px; }
+.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 44px; }
+.tile { background: var(--card); border-radius: 28px; padding: 30px 32px; }
+.tile h3 { font-size: 24px; margin-bottom: 14px; }
+.tile li { list-style: none; font-size: 19px; line-height: 1.4; color: var(--ink2); margin-top: 10px; }
+.tile li b { display: block; font-size: 15px; color: var(--tink, var(--ink)); }
+.tools { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+.tool { display: flex; gap: 14px; align-items: center; background: var(--card); border-radius: 18px; padding: 12px 16px; }
+.tool img { width: 40px; height: 40px; border-radius: 10px; object-fit: contain; }
+.tool b { display: block; font-size: 18px; } .tool span { font-size: 15px; color: var(--ink2); }
+.job { display: flex; gap: 22px; background: var(--card); border-radius: 26px; padding: 24px 28px; }
+.job > img { width: 64px; height: 64px; border-radius: 16px; flex: none; }
+.job h3 { font-size: 23px; } .job p { font-size: 17px; line-height: 1.4; }
+.job .sub2 { font-size: 16px; margin: 2px 0 8px; }
+.step { border-left: 3px solid #d9d9de; padding: 4px 0 4px 18px; margin-top: 12px; }
+.step.now { border-color: #fe4200; }
+.step b { font-size: 19px; } .step span { font-size: 15px; color: var(--ink2); margin-left: 10px; }
+.weblink { display: inline-flex; align-items: center; gap: 10px; margin-top: 26px; height: 52px; padding: 0 24px; border-radius: 999px; background: var(--tink, #141414); color: #fff; font-size: 20px; font-weight: 600; }
+
+.cmp { margin-top: 30px; border-radius: 26px; background: var(--card); padding: 4px 16px 10px; position: relative; }
+.cmp::after { content: ""; position: absolute; z-index: 0; top: -10px; bottom: -10px; right: 16px; width: 37%; border-radius: 22px; background: #fff; border: 2px solid var(--chip); }
+.cmp-row { display: grid; grid-template-columns: 1.1fr 1.4fr 1.4fr; position: relative; z-index: 1; }
+.cmp-row > span { padding: 14px 20px; font-size: 19px; display: flex; align-items: center; gap: 10px; }
+.cmp-row + .cmp-row > span { border-top: 1px solid var(--line); }
+.cmp-head > span { font-size: 16px; font-weight: 600; color: var(--ink2); }
+.cmp-head .us { color: var(--tink); font-size: 20px; font-weight: 700; }
+.cmp-head img { width: 32px; height: 32px; border-radius: 9px; }
+.cmp .t { font-weight: 600; } .cmp .them { color: #8a8b90; text-decoration: line-through; } .cmp .us { font-weight: 600; }
+.ba { margin-top: 16px; background: var(--card); border-radius: 22px; padding: 18px 20px; }
+.ba-top b { font-size: 19px; display: block; } .ba-top span { font-size: 15px; color: var(--ink2); }
+.ba-pair { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.ba-side { position: relative; background: #fff; border-radius: 16px; padding: 36px 14px 14px; display: grid; gap: 6px; align-content: start; }
+.ba-side small { position: absolute; top: 10px; left: 12px; font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 99px; }
+.ba-side.bef { box-shadow: inset 0 0 0 1px #f3d5d5; } .ba-side.bef small { background: #fde8e8; color: #b42318; }
+.ba-side.now { box-shadow: inset 0 0 0 2px var(--chip); } .ba-side.now small { background: var(--soft); color: var(--tink); }
+.ba-side em { font-style: normal; } .ba-side .l { font-size: 13px; color: var(--ink2); }
+.mini { display: block; height: 9px; border-radius: 99px; background: #ececef; overflow: hidden; } .mini i { display: block; height: 100%; width: 100%; }
+.bef .mini i { background: #e5484d; } .now .mini i { background: #c7c8cd; }
+.ba-side .t { font-size: 14px; } .bef .t, .bef .big { color: #c4262c; } .now .t { color: var(--ink2); }
+.ba-side .big { font-family: "Inter Tight"; font-weight: 700; font-size: 26px; letter-spacing: -.02em; white-space: nowrap; }
+.tvs { margin-top: 26px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.tv { display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center; background: var(--soft); border-radius: 24px; padding: 20px 20px 20px 24px; }
+.tv-l small { font-size: 14px; font-weight: 700; color: var(--tink); } .tv-l b { display: block; font-family: "Inter Tight"; font-size: 54px; letter-spacing: -.04em; line-height: 1; margin-top: 4px; }
+.tv-l span { display: block; font-size: 15px; color: var(--ink2); margin: 4px 0 10px; }
+.tv-l p { font-size: 14px; line-height: 1.35; color: var(--ink); background: #fff; border-radius: 12px; padding: 8px 10px; margin-top: 6px; }
+.tv-l i { display: block; font-style: normal; font-size: 11px; font-weight: 700; color: var(--tink); }
+.pouch { --t: #6c4cf5; --tink: #4a2fc9; --soft: #efeaff; --chip: #ddd3ff; --chipink: #2e1a8a; }
+.trust { --t: #e6a400; --tink: #6b4600; --soft: #fff6d9; --chip: #ffd65c; --chipink: #4a3200; }
+.cloudia { --t: #2f7cf6; --tink: #1d4fa8; --soft: #e6f1ff; --chip: #cfe3ff; --chipink: #12346e; }
+.vela { --t: #13a893; --tink: #0b5d52; --soft: #e5f7f3; --chip: #a9e7da; --chipink: #07443c; }
+.keells { --t: #8ef09b; --tink: #8ef09b; --chip: rgba(126,224,140,.18); --chipink: #8ef09b; }
+.dinetap { --t: #b83200; --tink: #9a2c00; --soft: #fff3ec; --chip: #ffd2bf; --chipink: #7a2200; }
+.bw { display: block; background: #fff; border: 1px solid rgba(80,30,0,.14); border-radius: 16px; overflow: hidden; }
+.bw:hover { text-decoration: none; }
+.bw-bar { height: 32px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #f6f3f1; border-bottom: 1px solid rgba(80,30,0,.1); position: relative; }
+.bw-bar i { width: 10px; height: 10px; border-radius: 50%; background: #dcd7d3; }
+.bw-bar span { position: absolute; left: 50%; transform: translateX(-50%); font-size: 13px; color: #8a7f78; background: #fff; border-radius: 99px; padding: 2px 16px; }
+.bw img { display: block; width: 100%; }
+</style>
+</head>
+<body>
+
+<!-- 1 cover -->
+<section class="page" style="background:#5b3df0;color:#fff;align-content:center">
+  <div style="display:flex;align-items:center;gap:40px">
+    <img src="../site/img/me.webp" style="width:170px;height:170px;border-radius:50%;object-fit:cover;border:5px solid rgba(255,255,255,.3)">
+    <div>
+      <p style="color:rgba(255,255,255,.75);font-size:26px">Portfolio 2026</p>
+      <h1 style="font-size:132px;line-height:1;font-weight:700;margin-top:8px">Sasanka Rasanjana</h1>
+    </div>
+  </div>
+  <p style="color:#fff;font-size:40px;margin-top:56px;max-width:1300px;font-family:'Inter Tight';letter-spacing:-.02em;line-height:1.25">Product and UX/UI designer. I start with what people actually say, in surveys, interviews or thousands of App Store reviews, then design the fix and see it built.</p>
+  <p style="color:rgba(255,255,255,.8);margin-top:48px">Colombo, Sri Lanka · On-site in Sri Lanka or remote worldwide</p>
+  <div class="foot" style="color:rgba(255,255,255,.7)"><span><a href="mailto:sasanka.rasanjana29@gmail.com">sasanka.rasanjana29@gmail.com</a> · <a href="https://www.linkedin.com/in/sasanka-rasanjana">LinkedIn</a></span><a href="https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/">sasankarasanjana29.github.io/sasanka-rasanjana-portfolio</a></div>
+</section>
+
+<!-- 2 about -->
+<section class="page" style="grid-template-rows:auto 1fr">
+  <h2>About me</h2>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;margin-top:48px;align-items:start">
+    <div>
+      <p style="font-size:30px;color:var(--ink);line-height:1.4">From portraits on Fiverr to nearly 2 years of product design at a restaurant tech company, and now building my own apps.</p>
+      <p style="margin-top:24px">I sketch the basic idea, build the small parts into a design system, then design the full app. Lately I hand that system to Claude Code and direct every screen of working cross-platform apps, tested on iPhone so far.</p>
+      <h3 style="font-size:22px;margin-top:44px">My creative stack</h3>
+      <div class="tools"><div class="tool"><img src="../site/img/tools/figma.svg"><div><b>Figma</b><span>UI, prototypes, design systems</span></div></div><div class="tool"><img src="../site/img/tools/claude.svg"><div><b>Claude Code</b><span>Research and building apps</span></div></div><div class="tool"><img src="../site/img/tools/clickup.svg"><div><b>ClickUp</b><span>Tasks with my team</span></div></div><div class="tool"><img src="../site/img/tools/slack.svg"><div><b>Slack</b><span>Team chat</span></div></div><div class="tool"><img src="../site/img/tools/lovable.svg"><div><b>Lovable</b><span>Hosting web projects</span></div></div><div class="tool"><img src="../site/img/tools/framer.svg"><div><b>Framer</b><span>Responsive websites</span></div></div><div class="tool"><img src="../site/img/tools/illustrator.webp"><div><b>Illustrator</b><span>Vector portraits</span></div></div><div class="tool"><img src="../site/img/tools/photoshop.svg"><div><b>Photoshop</b><span>Image editing</span></div></div></div>
+    </div>
+    <div style="display:grid;gap:20px">
+      <div class="job"><img src="../site/img/logos/dinetap-tile.png"><div style="flex:1"><h3>Dinetap</h3><p class="sub2">Restaurant technology, Singapore · remote from Sri Lanka</p>
+        <div class="step now"><b>Associate UX/UI Engineer</b><span>Dec 2025 to now · Promoted</span><p>A design role: mobile app, back office dashboard and the design system behind both.</p></div>
+        <div class="step"><b>Intern UX/UI Engineer</b><span>Apr to Dec 2025</span><p>A design role: app restructure and point of sale features with dev-ready specs.</p></div></div></div>
+      <div class="job"><img src="../site/img/logos/uwu-tile.png"><div><h3>BSc (Hons) Industrial Information Technology</h3><p class="sub2">Uva Wellassa University · 2021 to 2025</p><p>First Class Honours, GPA 3.74. Team thesis on how three generations use banking and shopping apps.</p></div></div>
+      <div class="job"><img src="../site/img/logos/fiverr-tile.png"><div><h3>Freelance Portrait Artist</h3><p class="sub2">Fiverr · Former Level 1 Seller · 2019 to now</p><p>100+ portraits for clients worldwide, rated 4.9.</p></div></div>
+    </div>
+  </div>
+  <div class="foot"><span>Sasanka Rasanjana</span><span>02</span></div>
+</section>
+
+<!-- 3 pouch research -->
+<section class="page split pouch">
+  <div>
+    <p class="meta">Pouch · My app · Designed by me, built with Claude Code</p>
+    <h2>A calm money app that <span class="chip">never asks for your bank login</span></h2>
+    <p style="margin-top:28px">I collected 1,751 public App Store reviews of a popular budgeting app, from 12 countries, and grouped every complaint.</p>
+    <a class="weblink" href="https://sasankarasanjana29.github.io/hedge-site/">Visit the Pouch website <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    <div class="bars">
+      <h3>What people complained about</h3><small>Share of all 1,751 reviews that raised each problem</small>
+      <div class="bar"><div class="row"><span>Bank sync breaks, or my bank is not supported</span><b>24%</b></div><div class="track"><i style="width:92%"></i></div></div>
+      <div class="bar"><div class="row"><span>Paying, or seeing the price only after setup</span><b>23%</b></div><div class="track"><i style="width:88%"></i></div></div>
+      <div class="bar"><div class="row"><span>The app crashes or will not open</span><b>8%</b></div><div class="track"><i style="width:31%"></i></div></div>
+    </div>
+  </div>
+  <div class="phones"><div class="ph"><img src="../site/img/apps/pouch-welcome.webp"></div><div class="ph fade"><img src="../site/img/apps/pouch-today.webp"></div><div class="ph fade"><img src="../site/img/apps/pouch-streak.webp"></div></div>
+  <div class="foot"><span>Desk research from public reviews. Not on the App Store yet. <a href="https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/pouch.html">Full case study</a> · <a href="https://sasankarasanjana29.github.io/hedge-site/">Pouch website</a></span><span>03</span></div>
+</section>
+
+<!-- 4 pouch decisions -->
+<section class="page pouch" style="grid-template-rows:auto auto 1fr">
+  <h2>What Pouch does instead</h2>
+  <div class="cmp">
+    <div class="cmp-row cmp-head"><span></span><span>Most budgeting apps</span><span class="us"><img src="../site/img/pouch-icon.webp">Pouch</span></div>
+    <div class="cmp-row"><span class="t">Getting your spends in</span><span class="them">Link your bank, and hope sync works</span><span class="us">Three taps, or paste the bank text</span></div>
+    <div class="cmp-row"><span class="t">Price</span><span class="them">Shown after setup</span><span class="us">Free, no paywall</span></div>
+    <div class="cmp-row"><span class="t">Your data</span><span class="them">On their servers</span><span class="us">Stays on your phone</span></div>
+    <div class="cmp-row"><span class="t">Language</span><span class="them">English first</span><span class="us">13 languages, Sinhala and Tamil too</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1.15fr;gap:56px;margin-top:34px;align-items:start">
+    <div>
+      <h3 style="font-size:24px">What I cut and why</h3>
+      <div class="ba"><div class="ba-top"><b>Red when you overspend</b><span>Guilt stops people logging.</span></div><div class="ba-pair"><div class="ba-side bef"><small>Before</small><em class="l">Groceries</em><span class="mini"><i></i></span><em class="t">Rs 520 over</em></div><div class="ba-side now"><small>Now</small><em class="l">Groceries</em><span class="mini"><i></i></span><em class="t">Rs 520 extra</em></div></div></div>
+      <div class="ba"><div class="ba-top"><b>A minus balance</b><span>A minus reads as failure.</span></div><div class="ba-pair"><div class="ba-side bef"><small>Before</small><em class="l">Safe to spend today</em><em class="big">-Rs 1,200</em></div><div class="ba-side now"><small>Now</small><em class="l">Safe to spend today</em><em class="big">Rs 0</em></div></div></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;align-items:start"><div style="text-align:center"><div class="ph fade" style="width:165px;margin:0 auto"><img src="../site/img/apps/pouch-bigbuy-tiles.webp"></div><h3 style="font-size:19px;margin-top:12px">Big buys</h3><p style="font-size:15px;margin-top:4px">A phone or a laptop paid off in parts, with the down payment, months and fee shown inline.</p></div><div style="text-align:center"><div class="ph fade" style="width:165px;margin:0 auto"><img src="../site/img/apps/pouch-wallets.webp"></div><h3 style="font-size:19px;margin-top:12px">Every wallet</h3><p style="font-size:15px;margin-top:4px">Cash, bank, cards and savings in one list, with net worth on top.</p></div><div style="text-align:center"><div class="ph fade" style="width:165px;margin:0 auto"><img src="../site/img/apps/pouch-budget.webp"></div><h3 style="font-size:19px;margin-top:12px">Categories in families</h3><p style="font-size:15px;margin-top:4px">Each category has its own colour and icon, grouped with what is left.</p></div></div>
+  </div>
+  <div class="foot"><span>Pouch · 280 automated tests on the money maths</span><span>04</span></div>
+</section>
+
+<!-- 5 dinetap -->
+<section class="page dinetap" style="background:linear-gradient(180deg,#fff3ec,#ffe3d6);grid-template-columns:1fr 1.25fr;gap:70px;align-items:center">
+  <div>
+    <p class="meta">Dinetap · Nearly 2 years, since April 2025</p>
+    <h2>A live <span class="chip">restaurant discovery</span> app, and the company website</h2>
+    <p style="margin-top:28px">At Dinetap I design the consumer app with engineers and a product analyst, and I designed and built the company website with Claude Code.</p>
+    <div class="spec"><div><dt>App</dt><dd><a href="https://apps.apple.com/app/dinetap/id6743796462">App Store</a></dd></div><div><dt>Website</dt><dd><a href="https://dinetap.com">dinetap.com</a></dd></div><div><dt>Australia</dt><dd><a href="https://dinetap.au">dinetap.au</a></dd></div></div>
+    <p style="margin-top:36px;font-size:20px;color:var(--tink)">A design role. Upcoming product work is not shown, to keep it confidential.</p>
+  </div>
+  <div style="position:relative;height:760px">
+    <div style="position:absolute;right:0;top:40px;width:900px"><img src="img/home.png" style="width:100%;border-radius:18px;border:1px solid rgba(80,30,0,.12)"></div>
+    <div class="phones" style="position:absolute;left:-40px;bottom:0"><div class="ph" style="width:250px"><img src="../site/img/screens/dinetap-list.webp"></div><div class="ph" style="width:250px"><img src="../site/img/screens/dinetap-home.webp"></div></div>
+  </div>
+  <div class="foot"><span><a href="https://apps.apple.com/app/dinetap/id6743796462">Dinetap on the App Store</a> · <a href="https://dinetap.com">dinetap.com</a> · <a href="https://dinetap.au">dinetap.au</a></span><span>05</span></div>
+</section>
+
+<!-- 5b dinetap website landing -->
+<section class="page dinetap" style="grid-template-columns:600px 1fr;gap:64px;align-items:start">
+  <div style="padding-top:20px">
+    <p class="meta">Dinetap website · Designed and built by me</p>
+    <h2>The <span class="chip">landing page</span> of dinetap.com</h2>
+    <p style="margin-top:28px">I designed and built dinetap.com with Claude Code, replacing the old Framer site. One scroll covers the four products, payments, devices and what a restaurant gets.</p>
+    <div style="margin-top:34px">
+      <div class="step now"><b>Hero</b><span>one system, one line, two actions</span></div>
+      <div class="step"><b>Four products</b><span>in tabs, so the page stays short</span></div>
+      <div class="step"><b>Payments</b><span>methods and partners at a glance</span></div>
+      <div class="step"><b>Devices</b><span>two terminals, side by side</span></div>
+      <div class="step"><b>What you get</b><span>three plain outcomes, then a demo</span></div>
+    </div>
+    <a class="weblink" href="https://dinetap.com">Visit dinetap.com</a>
+  </div>
+  <div style="display:flex;gap:32px;justify-content:flex-end">
+    <a class="bw" href="https://dinetap.com" style="width:520px;margin-top:36px"><div class="bw-bar"><i></i><i></i><i></i><span>dinetap.com</span></div><img src="img/land-1.jpg"></a>
+    <a class="bw" href="https://dinetap.com" style="width:520px"><div class="bw-bar"><i></i><i></i><i></i><span>dinetap.com</span></div><img src="img/land-2.jpg"></a>
+  </div>
+  <div class="foot"><span>Dinetap website · <a href="https://dinetap.com">dinetap.com</a> · <a href="https://dinetap.au">dinetap.au</a></span><span>06</span></div>
+</section>
+
+<!-- 5c dinetap website pages -->
+<section class="page dinetap" style="background:#fff3ec;padding-top:76px;grid-template-rows:auto 1fr;gap:30px">
+  <div style="display:flex;justify-content:space-between;align-items:end;gap:60px">
+    <div><p class="meta">Dinetap website · Product pages</p><h2>A page for <span class="chip">every product</span></h2></div>
+    <p style="max-width:640px;font-size:23px">The app, POS, Back Office and payments each get their own page with the same layout, and every page works down to a phone.</p>
+  </div>
+  <div style="display:flex;gap:48px;justify-content:center;align-items:start">
+    <div style="display:grid;grid-template-columns:512px 512px;gap:20px">
+      <a class="bw" href="https://dinetap.com/app"><div class="bw-bar"><i></i><i></i><i></i><span>dinetap.com/app</span></div><img src="img/app.jpg"></a>
+      <a class="bw" href="https://dinetap.com/cloud-pos"><div class="bw-bar"><i></i><i></i><i></i><span>dinetap.com/cloud-pos</span></div><img src="img/pos.jpg"></a>
+      <a class="bw" href="https://dinetap.com/backoffice"><div class="bw-bar"><i></i><i></i><i></i><span>dinetap.com/backoffice</span></div><img src="img/bo.jpg"></a>
+      <a class="bw" href="https://dinetap.com/payments"><div class="bw-bar"><i></i><i></i><i></i><span>dinetap.com/payments</span></div><img src="img/pay.jpg"></a>
+    </div>
+    <div class="ph fade" style="width:344px"><img src="img/m-app.jpg"></div>
+  </div>
+  <div class="foot"><span>Dinetap website · <a href="https://dinetap.com">dinetap.com</a> · <a href="https://dinetap.au">dinetap.au</a></span><span>07</span></div>
+</section>
+
+<!-- 6 trustbank research -->
+<section class="page split trust">
+  <div>
+    <p class="meta">TrustBank · Research case study · Fintech</p>
+    <h2>Making everyday banking feel <span class="chip">faster and safer</span> for every generation</h2>
+    <p style="margin-top:28px">From our team thesis of three at Uva Wellassa University (2025), comparing how Gen X, Millennials and Gen Z in Sri Lanka use banking apps. I designed TrustBank end to end.</p>
+    <div class="spec"><div><dt>Survey responses</dt><dd>~300</dd></div><div><dt>Expert interviews</dt><dd>9</dd></div><div><dt>Pilot</dt><dd>60</dd></div></div>
+  </div>
+  <div class="phones"><div class="ph fade"><img src="../site/img/screens/trust-08-home-1.webp"></div><div class="ph"><img src="../site/img/screens/trust-08-review-2.webp"></div><div class="ph"><img src="../site/img/screens/trust-08-pay-2.webp"></div></div>
+  <div class="foot"><span>TrustBank · Team thesis, Uva Wellassa University · <a href="https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/trustbank.html">Full case study</a></span><span>08</span></div>
+</section>
+
+<!-- 7 trustbank design -->
+<section class="page trust" style="grid-template-rows:auto auto 1fr">
+  <h2>From finding to design</h2>
+  <div class="tvs"><div class="tv"><div class="tv-l"><small>Sign-in</small><b>50%</b><span>of Gen X put face or fingerprint sign-in first.</span><p><i>Designed</i>Face ID by default, a code as the fallback.</p><p><i>Pilot</i>Codes and errors rewritten in plainer words.</p></div><div class="ph" style="width:150px"><img src="../site/img/screens/trust-08-06.webp"></div></div><div class="tv"><div class="tv-l"><small>Paying</small><b>37%</b><span>of Millennials put fast payment first.</span><p><i>Designed</i>One review screen, then Face ID approves.</p><p><i>Pilot</i>Steps that repeated themselves removed.</p></div><div class="ph" style="width:150px"><img src="../site/img/screens/trust-08-review-2.webp"></div></div><div class="tv"><div class="tv-l"><small>Proof</small><b>31%</b><span>of Gen X ranked transaction history next.</span><p><i>Designed</i>A reference and a PDF receipt every time.</p><p><i>Pilot</i>Larger tap targets and stronger contrast.</p></div><div class="ph" style="width:150px"><img src="../site/img/screens/trust-09-proof-1.webp"></div></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:22px;align-self:start">    <div class="bars" style="margin-top:0"><h3>What each generation put first</h3><small>Top answer in each generation</small>
+      <div class="bar"><div class="row"><span>Gen X: face or fingerprint sign-in</span><b>50%</b></div><div class="track"><i style="width:92%"></i></div></div>
+      <div class="bar"><div class="row"><span>Millennials: fast payment</span><b>37%</b></div><div class="track"><i style="width:68%"></i></div></div>
+      <div class="bar"><div class="row"><span>Gen Z: fast payment</span><b>27%</b></div><div class="track"><i style="width:50%"></i></div></div>
+    </div>
+    <div class="bars" style="margin-top:0"><h3>Most people wanted a calm design</h3><small>Share of each generation who preferred a minimal design</small>
+      <div class="bar"><div class="row"><span>Gen X</span><b>56%</b></div><div class="track"><i style="width:84%"></i></div></div>
+      <div class="bar"><div class="row"><span>Millennials</span><b>61%</b></div><div class="track"><i style="width:92%"></i></div></div>
+      <div class="bar"><div class="row"><span>Gen Z</span><b>53%</b></div><div class="track"><i style="width:80%"></i></div></div>
+    </div>
+  </div>
+  <div class="foot"><span>The finished screens have not been tested with users yet.</span><span>09</span></div>
+</section>
+
+<!-- 9 vela -->
+<section class="page split vela">
+  <div>
+    <p class="meta">VELA · Research case study · E-commerce</p>
+    <h2>Shopping that is <span class="chip">easy to search</span> and quick to check out</h2>
+    <p style="margin-top:28px">From the same team thesis: a shopping app made so Gen Z, Millennial and Gen X shoppers in Sri Lanka can search, decide and check out faster. Checkout became four predictable steps with the total always on screen.</p>
+    <div class="spec"><div><dt>Survey responses</dt><dd>~300</dd></div><div><dt>Expert interviews</dt><dd>9</dd></div><div><dt>Pilot</dt><dd>60</dd></div></div>
+  </div>
+  <div class="phones"><div class="ph"><img src="../site/img/screens/vela-04-01.webp"></div><div class="ph"><img src="../site/img/screens/vela-04-home-1.webp"></div><div class="ph"><img src="../site/img/screens/vela-04-09.webp"></div></div>
+  <div class="foot"><span>VELA · Team thesis, Uva Wellassa University · <a href="https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/vela.html">Full case study</a></span><span>10</span></div>
+</section>
+
+<!-- 9b vela design -->
+<section class="page vela" style="grid-template-rows:auto auto 1fr">
+  <h2>From finding to design</h2>
+  <div class="tvs"><div class="tv"><div class="tv-l"><small>Checkout</small><b>44%</b><span>of Gen X put a fast checkout first.</span><p><i>Designed</i>Four predictable steps, the total always on screen.</p><p><i>Pilot</i>Steps that added nothing were cut.</p></div><div class="ph" style="width:150px"><img src="../site/img/screens/vela-04-14.webp"></div></div><div class="tv"><div class="tv-l"><small>Search</small><b>28%</b><span>of Millennials put easy search first.</span><p><i>Designed</i>Recent and top searches, light filters.</p><p><i>Pilot</i>Not in our pilot notes, so still untested.</p></div><div class="ph" style="width:150px"><img src="../site/img/screens/vela-04-home-2.webp"></div></div><div class="tv"><div class="tv-l"><small>Trust</small><b>Pilot</b><span>found security steps easy to miss.</span><p><i>Designed</i>A failed payment offers retry or another method.</p><p><i>Pilot</i>This change came from the pilot itself.</p></div><div class="ph" style="width:150px"><img src="../site/img/screens/vela-04-17.webp"></div></div></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:22px;align-self:start">
+    <div class="bars" style="margin-top:0"><h3>Clean wins</h3><small>Share of each generation who preferred a minimal design</small>
+      <div class="bar"><div class="row"><span>Gen X</span><b>56%</b></div><div class="track"><i style="width:84%"></i></div></div>
+      <div class="bar"><div class="row"><span>Millennials</span><b>61%</b></div><div class="track"><i style="width:92%"></i></div></div>
+      <div class="bar"><div class="row"><span>Gen Z</span><b>53%</b></div><div class="track"><i style="width:80%"></i></div></div>
+    </div>
+    <div class="bars" style="margin-top:0"><h3>Different priorities</h3><small>What mattered most to each generation</small>
+      <div class="bar"><div class="row"><span>Gen X: fast checkout</span><b>44%</b></div><div class="track"><i style="width:92%"></i></div></div>
+      <div class="bar"><div class="row"><span>Millennials: easy search</span><b>28%</b></div><div class="track"><i style="width:59%"></i></div></div>
+      <div class="bar"><div class="row"><span>Millennials: product reviews</span><b>23%</b></div><div class="track"><i style="width:48%"></i></div></div>
+    </div>
+
+  </div>
+  <div class="foot"><span>The finished screens have not been tested with users yet.</span><span>11</span></div>
+</section>
+
+<!-- 10 keells -->
+<section class="page split keells" style="background:#0d2a17;color:#fff">
+  <div>
+    <p class="meta" style="color:#8ef09b">Keells · Redesign concept · Retail</p>
+    <h2>A fresh, modern <span class="chip">grocery app</span> for Sri Lanka's favourite supermarket</h2>
+    <p style="margin-top:28px;color:rgba(255,255,255,.75)">A fresher look, simpler navigation and a smoother path from basket to checkout. Shared on LinkedIn, it earned over 100,000 impressions.</p>
+    <div class="spec"><div><dt style="color:rgba(255,255,255,.6)">LinkedIn impressions</dt><dd>100k+</dd></div><div><dt style="color:rgba(255,255,255,.6)">Reactions</dt><dd>2k+</dd></div></div>
+    <p style="margin-top:36px;font-size:18px;color:rgba(255,255,255,.55)">An unofficial concept I designed on my own, not affiliated with or endorsed by John Keells Holdings or Keells.</p>
+  </div>
+  <div class="phones"><div class="ph"><img src="../site/img/apps/keells-05.webp"></div><div class="ph"><img src="../site/img/apps/keells-06.webp"></div><div class="ph"><img src="../site/img/apps/keells-14.webp"></div></div>
+  <div class="foot" style="color:rgba(255,255,255,.5)"><span><a href="https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/keells.html">Full case study</a> · Also on the website: <a href="https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/fretbelly.html">Fretbelly</a>, a small creature that eats your worries (in development) · <a href="https://sasankarasanjana29.github.io/fretbelly-site/">Fretbelly website</a></span><span>12</span></div>
+</section>
+
+<!-- 8 cloudia -->
+<section class="page split cloudia">
+  <div>
+    <p class="meta">Cloudia · My app · Designed by me, built with Claude Code</p>
+    <h2>For <span class="chip">small promises</span> too small for a calendar</h2>
+    <p style="margin-top:28px">Every item is a loop, either My turn or Waiting, so what you owe and what you are owed live in one calm place. Say one sentence and it fills a card per fact.</p>
+    <a class="weblink" href="https://sasankarasanjana29.github.io/cloudia-site/">Visit the Cloudia website <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    <div class="tile" style="margin-top:36px"><h3 style="font-size:22px">What I cut: a login streak</h3><ul><li><b>Cut</b>It would make the app nag you to protect a number.</li><li><b>Now</b>Days in the clear: days that end with nothing overdue.</li></ul></div>
+  </div>
+  <div class="phones"><div class="ph"><img src="../site/img/apps/cloudia-voice.webp"></div><div class="ph fade"><img src="../site/img/apps/cloudia-today.webp"></div><div class="ph"><img src="../site/img/apps/cloudia-seal.webp"></div></div>
+  <div class="foot"><span>Cloudia · Not on the App Store yet. <a href="https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/work/cloudia.html">Full case study</a> · <a href="https://sasankarasanjana29.github.io/cloudia-site/">Cloudia website</a></span><span>13</span></div>
+</section>
+
+<!-- 10 contact -->
+<section class="page" style="background:#5b3df0;color:#fff;align-content:center;justify-items:center;text-align:center">
+  <h2 style="font-size:110px">Let's make something<br>clear and useful.</h2>
+  <p style="color:rgba(255,255,255,.85);margin-top:36px;font-size:30px">Open to full-time UX/UI and product design roles: on-site in Sri Lanka, or remote from anywhere else.</p>
+  <p style="color:#fff;margin-top:56px;font-size:34px;font-weight:600"><a href="mailto:sasanka.rasanjana29@gmail.com">sasanka.rasanjana29@gmail.com</a></p>
+  <p style="color:rgba(255,255,255,.85);margin-top:18px;font-size:24px"><a href="https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/">Website</a> · <a href="https://www.linkedin.com/in/sasanka-rasanjana">LinkedIn</a> · <a href="https://www.behance.net/sasankarasanjana">Behance</a> · <a href="https://sasankarasanjana29.github.io/sasanka-rasanjana-portfolio/Sasanka_Rasanjana_CV.pdf">CV</a></p>
+</section>
+
+</body>
+</html>
