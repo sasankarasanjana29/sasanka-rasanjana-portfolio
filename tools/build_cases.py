@@ -563,7 +563,7 @@ POUCH = dict(
         ])),
         ('screens', 'Screens', '<h2>Screens</h2><p class="sub">Pick a part of the app.</p>' + viewer([
             ('Setup', ['The welcome: Hedge climbs the Pouch wall.', 'Split your pay until All planned.', 'Today shows what is safe to spend.'], ['pouch-welcome', 'pouch-split', 'pouch-today']),
-            ('Log a spend', ['Copy a bank text and Paste appears.', 'One tap fills in the amount and shop.', 'Siri payments wait on Today.'], ['pouch-paste-row', 'pouch-paste-filled', 'pouch-add-these']),
+            ('Log a spend', ['Copy a bank text and Paste appears.', 'One tap fills in the amount and shop.', 'Siri payments wait on Today.', 'A friend\'s cash? One switch keeps it out of the budget.'], ['pouch-paste-row', 'pouch-paste-filled', 'pouch-add-these', 'pouch-held']),
             ('Budget', ['Categories in families, with what is left.', 'Each has its own colour and icon.', 'See where the month went.'], ['pouch-budget', 'pouch-pot-edit', 'pouch-overview']),
             ('Wallets and big buys', ['Every wallet in one list.', 'Big buys paid off in parts.', 'Every entry by day.'], ['pouch-wallets', 'pouch-bigbuy-tiles', 'pouch-entries']),
             ('Any currency', ['Income has its own categories.', "Paid from abroad? Today's rate.", '13 languages, Sinhala and Tamil too.'], ['pouch-income', 'pouch-paid-in', 'pouch-today-si']),
