@@ -570,6 +570,10 @@ POUCH = dict(
             ('Hedge', ['Tap him for his trip through the woods.', 'Weeks, not days, so quiet days count.', 'Gems buy outfits from a wardrobe of 51.'], ['pouch-trip', 'pouch-streak', 'pouch-wardrobe']),
             ('Dark mode', ['Today in dark mode.', 'A new entry, every colour checked for contrast.', 'Budget in dark mode.'], ['pouch-dark-today', 'pouch-dark-new', 'pouch-dark-budget']),
         ])),
+        ('duo', 'Duo', '<h2>Ready for iPhone Duo</h2><p class="sub">Open, the big screen shows a list and what you tapped side by side, split on the fold. Closed, it is the phone app. Built and tested on the Duo simulator.</p>'
+            '<figure class="duo-shot" data-reveal><div class="duo-body"><img src="../img/apps/pouch-duo.webp" srcset="../img/apps/pouch-duo-800.webp 800w, ../img/apps/pouch-duo.webp 1600w" sizes="(max-width: 900px) 92vw, 880px" '
+            'alt="Pouch on an open iPhone Duo: Budget categories on the left, Rent paid on the right with Log into Rent and its entry" width="1600" height="1126" loading="lazy" decoding="async"></div>'
+            '<figcaption>Budget, Entries and Wallets each keep the list on the left and the chosen item on the right.</figcaption></figure>'),
         ('next', 'Next', '<h2>What I learned and what is next</h2>' + learned([
             ('Kind beats strict', 'Friendly words keep people logging.'),
             ('I use it daily', 'Most fixes came from my own logging.'),
@@ -709,7 +713,7 @@ def page(c):
   <link rel="preload" as="image" href="../img/phone-frame.webp" fetchpriority="high">
   <link rel="preload" href="../fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="../fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="../styles.css?v=20261126b">
+  <link rel="stylesheet" href="../styles.css?v=20261128a">
   <script>document.documentElement.classList.add('js')</script>
   {jsonld(c, stitle, sdesc)}
 </head>
