@@ -571,7 +571,7 @@ POUCH = dict(
             ('Dark mode', ['Today in dark mode.', 'A new entry, every colour checked for contrast.', 'Budget in dark mode.'], ['pouch-dark-today', 'pouch-dark-new', 'pouch-dark-budget']),
         ])),
         ('duo', 'Duo', '<h2>Ready for iPhone Duo</h2><p class="sub">Open, the big screen shows a list and what you tapped side by side, split on the fold. Closed, it is the phone app. Built and tested on the Duo simulator.</p>'
-            '<figure class="duo-shot" data-reveal><img src="../img/apps/pouch-duo.webp" srcset="../img/apps/pouch-duo-800.webp 800w, ../img/apps/pouch-duo.webp 1600w" sizes="(max-width: 900px) 92vw, 880px" '
+            '<figure class="duo-shot" data-reveal><img src="../img/apps/pouch-duo.webp?v=3" srcset="../img/apps/pouch-duo-800.webp?v=3 800w, ../img/apps/pouch-duo.webp?v=3 1600w" sizes="(max-width: 900px) 92vw, 880px" '
             'alt="Pouch on an open iPhone Duo: Budget categories on the left, Rent paid on the right with Log into Rent and its entry" width="1600" height="1162" loading="lazy" decoding="async">'
             '<figcaption>Budget, Entries and Wallets each keep the list on the left and the chosen item on the right.</figcaption></figure>'),
         ('next', 'Next', '<h2>What I learned and what is next</h2>' + learned([
