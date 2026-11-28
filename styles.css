@@ -1468,10 +1468,8 @@ html.lenis, html.lenis body { height: auto; }
 .step p a { color: var(--ink); font-weight: 600; text-decoration: underline; text-decoration-color: rgba(0,0,0,.25); text-underline-offset: 3px; transition: text-decoration-color 200ms ease; }
 .step p a:hover { text-decoration-color: currentColor; }
 
-/* Pouch on iPhone Duo: the open screen in a CSS-drawn black body, with a faint crease on the fold. */
+/* Pouch on iPhone Duo: Apple's own Duo frame (Night Sky, Apple Design Resources) with the simulator's
+   screens baked in, so it is one finished picture; the shadow follows the device's outline. */
 .duo-shot { margin: 28px 0 0; max-width: 880px; }
-.duo-body { position: relative; background: #15161b; padding: 12px; border-radius: 30px; box-shadow: inset 0 0 0 2px #2b2d34, 0 24px 40px rgba(20, 24, 36, .18); }
-.duo-body img { display: block; width: 100%; height: auto; border-radius: 19px; }
-.duo-body::after { content: ""; position: absolute; top: 12px; bottom: 12px; left: 50%; width: 20px; transform: translateX(-50%); background: linear-gradient(90deg, transparent, rgba(0, 0, 0, .07) 46%, rgba(255, 255, 255, .1) 54%, transparent); pointer-events: none; }
+.duo-shot img { display: block; width: 100%; height: auto; filter: drop-shadow(0 22px 26px rgba(20, 24, 36, .18)); }
 .duo-shot figcaption { margin-top: 14px; color: var(--ink-2); font-size: 15px; }
-@media (max-width: 640px) { .duo-body { padding: 7px; border-radius: 20px; } .duo-body img { border-radius: 14px; } .duo-body::after { top: 7px; bottom: 7px; } }
